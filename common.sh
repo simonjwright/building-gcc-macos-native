@@ -11,7 +11,7 @@ GCC_SRC=$SRC_PATH/gcc-$VERSION
 
 GCC_BOOT_FLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_names"
 
-NEW_PATH=/Volumes/Miscellaneous/tmp/opt/gcc-$VERSION/bin:$PATH
+NEW_PATH=$PREFIX/bin:$PATH
 
 XMLADA_SRC=$SRC_PATH/xmlada
 GPRBUILD_SRC=$SRC_PATH/gprbuild
