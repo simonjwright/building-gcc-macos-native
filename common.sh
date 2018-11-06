@@ -9,7 +9,7 @@ BUILD=x86_64-apple-darwin15
 SRC_PATH=$TOP/tmp
 GCC_SRC=$SRC_PATH/gcc-$VERSION
 
-GCC_BOOT_FLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_names"
+GCC_BOOT_LDFLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_names"
 
 NEW_PATH=$PREFIX/bin:$PATH
 
