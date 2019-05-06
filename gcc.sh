@@ -2,7 +2,7 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
-$GCC_SRC/configure                                     \
+$GCC_SRC/configure                                      \
   --prefix=$PREFIX                                      \
   --without-libiconv-prefix                             \
   --disable-libmudflap                                  \
@@ -21,3 +21,6 @@ $GCC_SRC/configure                                     \
 make -w -j3
 
 make install
+
+# need gmp for gnatcoll-bindings
+make -C gmp install

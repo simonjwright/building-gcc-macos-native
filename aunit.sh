@@ -7,5 +7,9 @@ PATH=$NEW_PATH:$PATH
 make -w -j3                                     \
      -C $AUNIT_SRC                              \
      GPRBUILD_OPTIONS="--db $script_loc/config" \
-     all                                        \
+     all
+
+make -w -j3                                     \
+     -C $AUNIT_SRC                              \
+     GPRBUILD_OPTIONS="--db $script_loc/config" \
      install
