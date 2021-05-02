@@ -16,7 +16,8 @@ $GCC_SRC/configure                                      \
   --host=$BUILD                                         \
   --target=$BUILD                                       \
   --build=$BUILD                                        \
-  --with-boot-ldflags="$GCC_BOOT_LDFLAGS"
+  --with-boot-ldflags="$GCC_BOOT_LDFLAGS"               \
+  --with-stage1-ldflags="$GCC_STAGE1_LDFLAGS"
 
 make -w -j3
 
