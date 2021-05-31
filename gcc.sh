@@ -12,12 +12,17 @@ $GCC_SRC/configure                                      \
   --disable-libcilkrts                                  \
   --disable-multilib                                    \
   --disable-nls                                         \
-  --enable-languages=c,c++,ada,fortran,objc,obj-c++     \
+  --enable-languages=c,ada                              \
   --host=$BUILD                                         \
   --target=$BUILD                                       \
   --build=$BUILD                                        \
   --with-boot-ldflags="$GCC_BOOT_LDFLAGS"               \
-  --with-stage1-ldflags="$GCC_STAGE1_LDFLAGS"
+  --with-stage1-ldflags="$GCC_STAGE1_LDFLAGS"           \
+  --enable-lto                                          \
+  --with-build-config=no                                \
+  --with-build-sysroot=${SDKROOT}                       \
+  --with-sysroot=                                       \
+  --with-specs='%{!sysroot=*:--sysroot=${SDKROOT}}'
 
 make -w -j3
 
