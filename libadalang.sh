@@ -20,13 +20,15 @@ source venv/bin/activate
 
     pip install $LANGKIT_SRC
 
-    python ada/manage.py generate
+    python manage.py generate
 
-    python ada/manage.py \
-           --library-types=static,static-pic,relocatable build
+    python manage.py                                            \
+           build                                                \
+           --library-types=static,static-pic,relocatable
 
-    python ada/manage.py \
-           --library-types=static,static-pic,relocatable install $PREFIX
+    python manage.py                                            \
+           install $PREFIX                                      \
+           --library-types=static,static-pic,relocatable
 )
 
 deactivate

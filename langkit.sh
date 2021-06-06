@@ -9,15 +9,19 @@ python3 -m venv venv
 source venv/bin/activate
 
 (
-    cd $SRC_PATH/langkit
+    cd $LANGKIT_SRC
 
-    pip install REQUIREMENTS.dev
+    pip install --upgrade pip
+
+    pip install wheel
+
+    pip install -r REQUIREMENTS.dev
 
     python manage.py \
-           make build-langkit-support \
+           build-langkit-support \
            --library-types=static,static-pic,relocatable
 
-    python $SRC_PATH/langkit/manage.py \
-           make install-langkit-support $PREFIX \
+    python manage.py \
+           install-langkit-support $PREFIX \
            --library-types=static,static-pic,relocatable
 )

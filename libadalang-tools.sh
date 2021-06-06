@@ -6,18 +6,8 @@ PATH=$NEW_PATH:$PATH
 
 # N.B. the upstream Makefile isn't a reference for good practice!
 
-make -w -C $LIBADALANG_TOOLS_SRC clean
-make -w -C $LIBADALANG_TOOLS_SRC lib
-
-# Don't want to do this!
-# make -w -C $SRC_PATH/libadalang-tools install-strip DESTDIR=$PREFIX/bin
-# Instead,
-
-function install()
-{
-    mkdir -p $PREFIX/bin
-    strip $LIBADALANG_TOOLS_SRC/bin/gnat*
-    cp $LIBADALANG_TOOLS_SRC/bin/gnat* $PREFIX/bin/
-}
-
-install
+# make -w -C $LIBADALANG_TOOLS_SRC DESTDIR=$PREFIX clean
+# make -w -C $LIBADALANG_TOOLS_SRC DESTDIR=$PREFIX lib
+make -w -C $LIBADALANG_TOOLS_SRC DESTDIR=$PREFIX LIBRARY_TYPE=relocatable bin
+make -w -C $LIBADALANG_TOOLS_SRC DESTDIR=$PREFIX install-lib
+make -w -C $LIBADALANG_TOOLS_SRC DESTDIR=$PREFIX install-bin-strip
