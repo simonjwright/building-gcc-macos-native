@@ -27,7 +27,7 @@ source venv/bin/activate
            --library-types=static,static-pic,relocatable
 
     python manage.py                                            \
-           install $PREFIX                                      \
+           install ${PREFIX}                                    \
            --library-types=static,static-pic,relocatable
 )
 

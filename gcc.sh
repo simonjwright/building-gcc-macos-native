@@ -12,10 +12,14 @@ $GCC_SRC/configure                              \
   --disable-libcilkrts                          \
   --disable-multilib                            \
   --disable-nls                                 \
-  --enable-languages=c,ada                      \
+  --enable-languages=c,c++,ada                  \
   --host=$BUILD                                 \
   --target=$BUILD                               \
   --build=$BUILD                                \
+  --with-gmp=$PREFIX                            \
+  --with-mpfr=$PREFIX                           \
+  --with-mpc=$PREFIX                            \
+  --without-isl                                 \
   --with-boot-ldflags="$GCC_BOOT_LDFLAGS"       \
   --with-stage1-ldflags="$GCC_STAGE1_LDFLAGS"   \
   --with-build-sysroot="$SDKROOT"               \
@@ -25,6 +29,3 @@ $GCC_SRC/configure                              \
 make -w -j4
 
 make install
-
-# need gmp for gnatcoll-bindings
-make -C gmp install

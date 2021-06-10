@@ -20,18 +20,11 @@ cd $GNATCOLL_BINDINGS_SRC
  ./setup.py install
 )
 
-(cd python
- ./setup.py clean
- ./setup.py build --reconfigure --gpr-opts --db $script_loc/config
- ./setup.py uninstall
- ./setup.py install
-)
-
 (cd python3
- ./setup.py clean
- ./setup.py build --reconfigure --gpr-opts --db $script_loc/config
- ./setup.py uninstall
- ./setup.py install
+ python3 ./setup.py clean
+ python3 ./setup.py build --reconfigure --gpr-opts --db $script_loc/config
+ python3 ./setup.py uninstall
+ python3 ./setup.py install
 )
 
 (cd readline

@@ -4,11 +4,12 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 PATH=$NEW_PATH:$PATH
 
-$GCC_SRC/gmp/configure                          \
+$GCC_SRC/mpc/configure                          \
   --prefix=$PREFIX                              \
   --host=$BUILD                                 \
   --target=$BUILD                               \
   --build=$BUILD                                \
+  --with-mpfr=$PREFIX                           \
   --enable-shared
 
 make -w -j3
