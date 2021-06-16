@@ -35,10 +35,10 @@ The scripts below build the libraries in both static and relocatable forms.
 The scripts are to some extent order-dependent. An appropriate order
 would be
 
+* `gcc.sh`
 * `gmp.sh`
 * `mpfr.sh`
 * `mpc.sh`
-* `gcc.sh`
 * `xmlada.sh`
 * `gprbuild.sh`
 * `gprconfig.sh` (not required for GNAT CE 2021)

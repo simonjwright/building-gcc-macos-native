@@ -1,8 +1,9 @@
 # Ensure the GCC source tree already has required versions of GMP,
 # MPFR, MPC installed via contrib/download_prerequisites.
 
+PREFIX=/opt/gnat-ce-2021
+
 TOP=/Volumes/Miscellaneous1
-PREFIX=$TOP/x86_64/gnat-ce-2021
 BUILD=x86_64-apple-darwin15
 
 SRC_PATH=$TOP/src/gnat-ce-2021
@@ -14,6 +15,8 @@ GCC_BOOT_LDFLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_na
 GCC_STAGE1_LDFLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_names"
 
 NEW_PATH=$PREFIX/bin:$PATH
+
+# full Xcode
 SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
 
 AUNIT_SRC=$SRC_PATH/aunit-2021-20210518-19DC5-src
