@@ -16,12 +16,13 @@ $GCC_SRC/configure                                      \
   --host=$BUILD                                         \
   --target=$BUILD                                       \
   --build=$BUILD                                        \
-  --with-boot-ldflags="$GCC_BOOT_LDFLAGS"               \
-  --with-stage1-ldflags="$GCC_STAGE1_LDFLAGS"
+  --without-isl                                         \
+  --with-build-sysroot="$SDKROOT"                       \
+  --with-sysroot=                                       \
+  --with-specs="%{!sysroot=*:--sysroot=$SDKROOT}"       \
+  --with-build-config=no                                \
+  --enable-bootstrap
 
 make -w -j3
 
 make install
-
-# need gmp for gnatcoll-bindings
-make -C gmp install

@@ -22,10 +22,23 @@ cd <i>package</i>
 
 ## Building ##
 
+GCC relies on external maths libraries (e.g. the [GNU Multiple Precision Arithmetic Library][GMP]). To download and set them up, go to the top level of the GCC source directory and say
+```
+contribs/download_prerequisites
+```
+The scripts below build the libraries in both static and relocatable forms.
+
+[GMP]: https://gmplib.org
+
+----
+
 The scripts are to some extent order-dependent. An appropriate order
 would be
 
 * `gcc.sh`
+* `gmp.sh`
+* `mpfr.sh`
+* `mpc.sh`
 * `xmlada.sh`
 * `gprbuild.sh`
 * `gprconfig.sh`
@@ -33,11 +46,10 @@ would be
 * `gnatcoll-core.sh`
 * `gnatcoll-bindings.sh`
 * `gnatcoll-db.sh`
-* `langkit.sh`
 * `libadalang.sh`
 * `libadalang-tools.sh`
 * `gdb.sh`
 
 ## Notes ##
 
-*XML/Ada* requires *gprbuild*. In order to have built GCC, you must have had a compatible GNAT on your `PATH` already. Assuming that that GNAT contains a *gprbuild*, that should do (The GCC 8.1.0 *XML/Ada* built OK with the GCC 7.1.0 *gprbuild*). If not, check out `bootstrap.sh` in the *gprbuild* sources.
+*XML/Ada* requires *gprbuild*. In order to have built GCC, you must have had a compatible GNAT on your `PATH` already. Assuming that that GNAT contains a *gprbuild*, that should do (for example, the GCC 8.1.0 *XML/Ada* built OK with the GCC 7.1.0 *gprbuild*). If not, check out `bootstrap.sh` in the *gprbuild* sources.

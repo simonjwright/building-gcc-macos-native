@@ -26,7 +26,7 @@ source venv/bin/activate
            --library-types=static,static-pic,relocatable build
 
     python ada/manage.py \
-           --library-types=static,static-pic,relocatable install $PREFIX
+           --library-types=static,static-pic,relocatable install -f $PREFIX
 )
 
 deactivate
