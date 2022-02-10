@@ -1,19 +1,15 @@
 # Ensure the GCC source tree already has required versions of GMP,
 # MPFR, MPC installed via contrib/download_prerequisites.
 
-VERSION=11.2.0
-PREFIX=/opt/gcc-11.2.0
+VERSION=12.0.1
+PREFIX=/opt/gcc-12.0.1
 
 TOP=/Volumes/Miscellaneous1
 BUILD=x86_64-apple-darwin15
 
 SRC_PATH=$TOP/src
 GCC_SRC=$SRC_PATH/gcc-$VERSION
-
-# for full bootstrap build
-GCC_BOOT_LDFLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_names"
-# for --disable-bootstrap build
-GCC_STAGE1_LDFLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_names"
+GCC_SRC=$SRC_PATH/gcc
 
 NEW_PATH=$PREFIX/bin:$PATH
 

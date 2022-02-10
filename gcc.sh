@@ -12,7 +12,7 @@ $GCC_SRC/configure                                      \
   --disable-libcilkrts                                  \
   --disable-multilib                                    \
   --disable-nls                                         \
-  --enable-languages=c,c++,ada,fortran,objc,obj-c++     \
+  --enable-languages=c,c++,ada    \
   --host=$BUILD                                         \
   --target=$BUILD                                       \
   --build=$BUILD                                        \
@@ -21,7 +21,7 @@ $GCC_SRC/configure                                      \
   --with-sysroot=                                       \
   --with-specs="%{!sysroot=*:--sysroot=$SDKROOT}"       \
   --with-build-config=no                                \
-  --enable-bootstrap
+  --disable-bootstrap
 
 make -w -j3
 
