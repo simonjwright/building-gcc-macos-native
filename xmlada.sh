@@ -13,6 +13,6 @@ cd $XMLADA_SRC
   --build=$BUILD                                \
   --enable-shared
 
-make -w -j3 GPRBUILD_OPTIONS="--db $script_loc/config"
+make -w -j3
 
 make install

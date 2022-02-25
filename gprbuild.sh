@@ -6,12 +6,15 @@ PATH=$NEW_PATH:$PATH
 
 make -f $GPRBUILD_SRC/Makefile ENABLE_SHARED=yes setup
 
-make -w -j3 GPRBUILD_OPTIONS="--db $script_loc/config"  \
-     -f $GPRBUILD_SRC/Makefile                          \
-     all                                                \
+make -w -j3                                     \
+     -f $GPRBUILD_SRC/Makefile                  \
+     all                                        \
      libgpr.build
 
-make -w GPRBUILD_OPTIONS="--db $script_loc/config"      \
-     -f $GPRBUILD_SRC/Makefile                          \
-     install                                            \
+make -w                                         \
+     -f $GPRBUILD_SRC/Makefile                  \
+     install                                    \
      libgpr.install
+
+# Remove the highly-misleading script installed in the top-level directory.
+rm -f $PREFIX/doinstall

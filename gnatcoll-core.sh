@@ -10,10 +10,8 @@ make -f $GNATCOLL_CORE_SRC/Makefile             \
      setup
 
 make -w                                         \
-     GPRBUILD_OPTIONS="--db $script_loc/config" \
      -f $GNATCOLL_CORE_SRC/Makefile
 
 make -w                                         \
-     GPRBUILD_OPTIONS="--db $script_loc/config" \
      -f $GNATCOLL_CORE_SRC/Makefile             \
      install
