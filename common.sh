@@ -2,19 +2,21 @@
 # MPFR, MPC installed via contrib/download_prerequisites.
 
 VERSION=12.0.1
-PREFIX=/opt/gcc-12.0.1
+PREFIX=/opt/gcc-$VERSION
+BUILD=x86_64-apple-darwin21
 
 TOP=/Volumes/Miscellaneous1
-BUILD=x86_64-apple-darwin15
+
+# override the above version
+PREFIX=/opt/gcc-12.0.1-2
 
 SRC_PATH=$TOP/src
+
 GCC_SRC=$SRC_PATH/gcc-$VERSION
+# override the above version
 GCC_SRC=$SRC_PATH/gcc
 
 NEW_PATH=$PREFIX/bin:$PATH
-
-# full Xcode
-SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
 
 AUNIT_SRC=$SRC_PATH/aunit
 GDB_PATH=$SRC_PATH/gdb-10.2

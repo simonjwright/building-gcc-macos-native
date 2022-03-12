@@ -12,21 +12,47 @@ source venv/bin/activate
 (
     cd $LIBADALANG_SRC
 
+    rm -rf build
+
     pip install --upgrade pip
 
     pip install wheel
 
     pip install -r REQUIREMENTS.dev
 
-    pip install $LANGKIT_SRC
+    (
+        cd $LANGKIT_SRC
 
-    python ada/manage.py generate
+        rm -rf build
 
-    python ada/manage.py \
-           --library-types=static,static-pic,relocatable build
+        pip install -r REQUIREMENTS.dev
 
-    python ada/manage.py \
-           --library-types=static,static-pic,relocatable install -f $PREFIX
+        pip install .
+
+        python manage.py                        \
+               build-langkit-support            \
+               --library-types=relocatable
+
+        # no --force in install-langkit-support
+        gprinstall --prefix=$PREFIX --uninstall langkit_support || true
+
+        python manage.py                        \
+               install-langkit-support          \
+               --library-types=relocatable      \
+               $PREFIX
+    )
+
+    python manage.py generate
+
+    python manage.py                            \
+           build                                \
+           --library-types=relocatable
+
+    python manage.py                            \
+           install                              \
+           --force                              \
+           --library-types=relocatable          \
+           $PREFIX
 )
 
 deactivate
