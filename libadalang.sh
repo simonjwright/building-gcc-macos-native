@@ -2,10 +2,10 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
-PATH=$NEW_PATH:$PATH
+PATH=$NEW_PATH
 
 rm -rf venv
-python3 -m venv venv
+python3.9 -m venv venv
 
 source venv/bin/activate
 

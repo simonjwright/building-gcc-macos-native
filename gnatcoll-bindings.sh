@@ -2,64 +2,31 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
-PATH=$NEW_PATH:$PATH
+PATH=$NEW_PATH
 
 cd $GNATCOLL_BINDINGS_SRC
 
-(cd gmp
- ./setup.py clean
- ./setup.py build --reconfigure
- ./setup.py uninstall
- ./setup.py install
-)
+binding="gmp iconv lzma omp python3 readline syslog zlib"
 
-(cd iconv
- ./setup.py clean
- ./setup.py build --reconfigure
- ./setup.py uninstall
- ./setup.py install
-)
+# Reduce from the full list because:
+# o We can't do LZMA, because macOS doesn't support the multithreading
+#   option and the GNATCOLL code doesn't make it optional.
+# o There's a Python (probably 3.10) issue with omp, "Object of type
+#   bytes is not JSON serializable."
+binding="gmp iconv python3 readline syslog zlib"
 
-# We can't do LZMA, because macOS doesn't support the multithreading option
-# and the GNATCOLL code doesn't make it optional.
-# (cd lzma
-#  ./setup.py clean
-#  ./setup.py build --reconfigure
-#  ./setup.py uninstall
-#  ./setup.py install
-# )
-
-(cd omp
- ./setup.py clean
- ./setup.py build --reconfigure
- ./setup.py uninstall
- ./setup.py install
-)
-
-(cd python3
- ./setup.py clean
- ./setup.py build --reconfigure
- ./setup.py uninstall
- ./setup.py install
-)
-
-(cd readline
- ./setup.py clean
- ./setup.py build --accept-gpl --reconfigure
- ./setup.py uninstall
- ./setup.py install
-)
-
-(cd syslog
- ./setup.py clean
- ./setup.py build --reconfigure
- ./setup.py uninstall
- ./setup.py install
-)
-
-(cd zlib
- ./setup.py clean
- ./setup.py build --reconfigure
- ./setup.py uninstall
- ./setup.py install
-)
+for bnd in $binding; do
+    (cd $bnd
+     set -eu
+     ./setup.py clean
+     case $bnd in
+         readline)
+             ./setup.py build --accept-gpl --reconfigure
+             ;;
+         *)
+             ./setup.py build --reconfigure
+             ;;
+     esac
+     ./setup.py install
+    )
+done

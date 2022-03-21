@@ -2,18 +2,29 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
-PATH=$NEW_PATH:$PATH
+PATH=$NEW_PATH
 
-make -f $GPRBUILD_SRC/Makefile ENABLE_SHARED=yes setup
+rm -rf *
 
-make -w -j3                                     \
+make -f $GPRBUILD_SRC/Makefile                  \
+     TARGET=$BUILD                              \
+     ENABLE_SHARED=yes                          \
+     setup
+
+make -w -j7                                     \
      -f $GPRBUILD_SRC/Makefile                  \
-     all                                        \
+     all
+
+make -w -j7                                     \
+     -f $GPRBUILD_SRC/Makefile                  \
      libgpr.build
 
 make -w                                         \
      -f $GPRBUILD_SRC/Makefile                  \
-     install                                    \
+     install
+
+make -w                                         \
+     -f $GPRBUILD_SRC/Makefile                  \
      libgpr.install
 
 # Remove the highly-misleading script installed in the top-level directory.

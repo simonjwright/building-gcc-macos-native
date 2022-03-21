@@ -2,7 +2,9 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
-PATH=$NEW_PATH:$PATH
+PATH=$NEW_PATH
+
+make -f $GNATCOLL_CORE_SRC/Makefile clean
 
 make -f $GNATCOLL_CORE_SRC/Makefile             \
      prefix=$PREFIX                             \
@@ -10,6 +12,7 @@ make -f $GNATCOLL_CORE_SRC/Makefile             \
      setup
 
 make -w                                         \
+     -j7                                        \
      -f $GNATCOLL_CORE_SRC/Makefile
 
 make -w                                         \

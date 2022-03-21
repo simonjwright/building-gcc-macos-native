@@ -39,9 +39,9 @@ would be
 * `gmp.sh`
 * `mpfr.sh`
 * `mpc.sh`
+* `gprconfig.sh`
 * `xmlada.sh`
 * `gprbuild.sh`
-* `gprconfig.sh`
 * `aunit.sh`
 * `gnatcoll-core.sh`
 * `gnatcoll-bindings.sh`
