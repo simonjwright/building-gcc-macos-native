@@ -1,3 +1,8 @@
+# If the argument is 'cross', build the cross-compiler.
+# if not, use the cross-compiler to build the real compiler.
+
+arg="$1"
+
 script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
@@ -11,11 +16,9 @@ ARM=aarch64-apple-darwin21
 
 XPREFIX=~/tmp/aarch64-apple-darwin-cross-8
 
-echo "BUILDING THE CROSS-COMPILER IN $XPREFIX"
-
-(
-    exit 0
+[ "x$arg" == xcross ]  && (
     set -eu
+    echo "BUILDING THE CROSS-COMPILER IN $XPREFIX"
     [ -d cross ] || mkdir cross
     cd cross
     $GCC_SRC/configure                          \
@@ -50,10 +53,12 @@ echo "BUILDING THE CROSS-COMPILER IN $XPREFIX"
         OTOOL_FOR_TARGET=/usr/bin/otool         \
         RANLIB_FOR_TARGET=/usr/bin/ranlib       \
         STRIP_FOR_TARGET=/usr/bin/strip
-        
+    
     make -w -j7
 
     make -w -j7 install
+
+    exit
 )
 
 echo "BUILDING THE COMPILER IN $PREFIX"
@@ -89,7 +94,7 @@ echo "BUILDING THE COMPILER IN $PREFIX"
         --with-ranlib=/usr/bin/ranlib                                        \
         --with-dsymutil=/usr/bin/dsymutil                                    \
         --with-build-config=no                                               \
-        --enable-bootstrap
+        --disable-bootstrap
     
     make -w -j7
 
