@@ -1,3 +1,5 @@
+set -eu
+
 script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
@@ -24,8 +26,8 @@ $GCC_SRC/configure                                                      \
   --with-sysroot=                                                       \
   --with-specs="%{!sysroot=*:--sysroot=%:if-exists-else($XCODE $CLU)}"  \
   --with-build-config=no                                                \
-  --disable-bootstrap
+  --enable-bootstrap
 
-make -w -j3
+make -w -j7
 
 make install

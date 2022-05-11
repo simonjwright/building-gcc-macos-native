@@ -1,20 +1,20 @@
 # Ensure the GCC source tree already has required versions of GMP,
 # MPFR, MPC installed via contrib/download_prerequisites.
 
-VERSION=12.0.1
+VERSION=12.1.0
 PREFIX=/opt/gcc-$VERSION
-BUILD=x86_64-apple-darwin21
+BUILD=x86_64-apple-darwin15
 
 TOP=/Volumes/Miscellaneous1
 
-# override the above version
-PREFIX=/opt/gcc-12.0.1-2
+# override the above version if necessary
+# PREFIX=
 
 SRC_PATH=$TOP/src
 
 GCC_SRC=$SRC_PATH/gcc-$VERSION
-# override the above version
-GCC_SRC=$SRC_PATH/gcc
+# override the above version if necessary
+# GCC_SRC=$SRC_PATH/gcc
 
 NEW_PATH=$PREFIX/bin:$PATH
 
