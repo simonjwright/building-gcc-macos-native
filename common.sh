@@ -3,25 +3,25 @@
 
 set -eu
 
-VERSION=12.0.1
+VERSION=12.1.0
 PREFIX=/opt/gcc-$VERSION
 BUILD=aarch64-apple-darwin21
 
 TOP=/Volumes/Miscellaneous1
 
-# override the above version
-PREFIX=/opt/gcc-12.0.1-aarch64
+# override the above version if necessary
+PREFIX=/opt/gcc-$VERSION-aarch64
 
 SRC_PATH=$TOP/src
 
 GCC_SRC=$SRC_PATH/gcc-$VERSION
 # override the above version
-GCC_SRC=$SRC_PATH/gcc-darwin-arm64
+GCC_SRC=$SRC_PATH/gcc-12-aarch64
 
 NEW_PATH=$PREFIX/bin:$PATH
 
 AUNIT_SRC=$SRC_PATH/aunit
-GDB_PATH=$SRC_PATH/gdb-10.2
+GDB_PATH=$SRC_PATH/binutils-gdb
 GNATCOLL_BINDINGS_SRC=$SRC_PATH/gnatcoll-bindings
 GNATCOLL_CORE_SRC=$SRC_PATH/gnatcoll-core
 GNATCOLL_DB_SRC=$SRC_PATH/gnatcoll-db
