@@ -94,7 +94,7 @@ echo "BUILDING THE COMPILER IN $PREFIX"
         --with-ranlib=/usr/bin/ranlib                                        \
         --with-dsymutil=/usr/bin/dsymutil                                    \
         --with-build-config=no                                               \
-        --disable-bootstrap
+        --enable-bootstrap
     
     make -w -j7
 

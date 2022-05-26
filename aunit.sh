@@ -6,7 +6,7 @@ PATH=$NEW_PATH
 
 make -w -j7                                     \
      -C $AUNIT_SRC                              \
-     all
+     clean all
 
 make -w                                         \
      -C $AUNIT_SRC                              \
