@@ -9,7 +9,7 @@ PATH=$NEW_PATH
 $GDB_PATH/configure                             \
     --build=$BUILD                              \
     --prefix=$PREFIX                            \
-    --with-python=python3                       \
+    --with-python=no                            \
     --disable-werror
 
 make -w all -j3

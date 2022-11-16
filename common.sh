@@ -1,7 +1,9 @@
 # Ensure the GCC source tree already has required versions of GMP,
 # MPFR, MPC installed via contrib/download_prerequisites.
 
-VERSION=12.1.0
+set -eu
+
+VERSION=12.2.0
 PREFIX=/opt/gcc-$VERSION
 BUILD=x86_64-apple-darwin15
 
@@ -28,4 +30,5 @@ GPRCONFIG_SRC=$SRC_PATH/gprconfig_kb
 LANGKIT_SRC=$SRC_PATH/langkit
 LIBADALANG_SRC=$SRC_PATH/libadalang
 LIBADALANG_TOOLS_SRC=$SRC_PATH/libadalang-tools
+TEMPLATES_PARSER_SRC=$SRC_PATH/templates-parser
 XMLADA_SRC=$SRC_PATH/xmlada
