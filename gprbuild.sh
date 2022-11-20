@@ -9,6 +9,11 @@ rm -rf *
 make -f $GPRBUILD_SRC/Makefile                  \
      TARGET=$BUILD                              \
      ENABLE_SHARED=yes                          \
+     clean
+
+make -f $GPRBUILD_SRC/Makefile                  \
+     TARGET=$BUILD                              \
+     ENABLE_SHARED=yes                          \
      setup
 
 make -w -j7                                     \

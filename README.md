@@ -47,11 +47,13 @@ would be
 * `gnatcoll-bindings.sh`
 * `gnatcoll-db.sh`
 * `libadalang.sh`
+* `templates-parser.sh`
 * `libadalang-tools.sh`
-* `gdb.sh`
+* `gdb.sh` (not useful on aarch64?)
 
 ## Notes ##
 
 * *XML/Ada* requires *gprbuild*. In order to have built GCC, you must have had a compatible GNAT on your `PATH` already. Assuming that that GNAT contains a *gprbuild*, that should do (for example, the GCC 8.1.0 *XML/Ada* built OK with the GCC 7.1.0 *gprbuild*). If not, check out `bootstrap.sh` in the *gprbuild* sources.
 * `gprbuild`: update `{gprbuild}/gpr/src/gpr-version.ads` to match the current release state.
 * `gnatmetric`, `gnatpp`, `gnatstub`, `gnattest`: update `{libadalang-tools}/src/utils-versions.ads` likewise.
+* `libadalang` and `langkit` sources need to be kept synchronised.

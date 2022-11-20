@@ -6,4 +6,4 @@ install_loc=$PREFIX/share/gprconfig
 
 mkdir -p $install_loc
 
-cp -p $GPRCONFIG_SRC/db/*.{ent,xml} $install_loc/
+cp -p $GPRCONFIG_SRC/db/* $install_loc/

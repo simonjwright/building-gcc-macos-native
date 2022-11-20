@@ -14,7 +14,7 @@ SDKROOT=$(xcrun --show-sdk-path)
 X86=x86_64-apple-darwin21
 ARM=aarch64-apple-darwin21
 
-XPREFIX=~/tmp/aarch64-apple-darwin-cross-8
+XPREFIX=~/tmp/aarch64-apple-darwin-cross
 
 [ "x$arg" == xcross ]  && (
     set -eu
