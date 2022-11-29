@@ -25,7 +25,7 @@ Target: aarch64-apple-darwin21
 
 Configured with:
 ```
---prefix=/opt/gcc-12.2.0
+--prefix=/opt/gcc-12.2.0-aarch64
 --without-libiconv-prefix
 --disable-libmudflap
 --disable-libstdcxx-pch
@@ -65,7 +65,7 @@ Download the binary `.pkg`. It's not signed, so **don't** double-click on it; in
 
 ### Setting PATH ###
 
-`PATH` needs to be set to include `/opt/gcc-12.1.0-aarch64/bin` at the front:
+`PATH` needs to be set to include `/opt/gcc-12.2.0-aarch64/bin` at the front:
 
 #### `bash` ####
 
