@@ -1,4 +1,4 @@
-This is GCC 12.2.0 built on macOS Ventura (13, Darwin 22) but able to run on Monterey, for Apple silicon (M1), with Command Line Utilities 14.1.0.
+This is GCC 12.2.0 built on macOS Ventura (13, Darwin 22) but able to run on Monterey, for Apple silicon (M1), with Command Line Utilities 14.1.0 and Python 3.9.13.
 
 **gcc-12.2.0-aarch64-apple-darwin21.pkg**
 
