@@ -2,6 +2,11 @@
 
 This set of scripts supports building GCC Ada, or GNAT, on macOS as a native compiler, and then its supporting tools.
 
+The two major branches are:
+
+* to build for Intel silicon, `x86_64-apple-darwin`
+* to build for Apple silicon, `aarch64-apple-darwin`
+
 `python3` is required. If not installed, you can download a binary from [python.org](https://www.python.org).
 
 The order is important.
@@ -12,12 +17,12 @@ A common point is that some of the components need to be built 'out of tree', th
 
 The common information is in [`common.sh`](common.sh), which is sourced by the other scripts and sets environment variables.
 
-Assuming you've got this directory in `~/building-x86_64`, all your source code in <tt>~/gcc-src/<i>package-src</i></tt>, and you're going to build under `~/tmp/x86_64`, you would, for each component, in `~/tmp/x86_64`:
+Assuming you've got this directory in `~/building-gcc-macos-native`, all your source code in <tt>~/gcc-src/<i>package-src</i></tt>, and you're going to build under `~/tmp/x86_64`, you would, for each component, in `~/tmp/x86_64`:
 
 <pre>
 mkdir <i>package</i>
 cd <i>package</i>
-~/building-x86-64/<i>package</i>.sh
+~/building-gcc-macos-native/<i>package</i>.sh
 </pre>
 
 ## Building ##
