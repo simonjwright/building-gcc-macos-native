@@ -3,20 +3,23 @@
 
 set -eu
 
-VERSION=12.2.0
+VERSION=13.1.0
 PREFIX=/opt/gcc-$VERSION
-BUILD=x86_64-apple-darwin15
+BUILD=x86_64-apple-darwin21
 
-TOP=/Volumes/Miscellaneous1
+TOP=/Volumes/Miscellaneous3
 
 # override the above version if necessary
-# PREFIX=
+# PREFIX=/opt/gcc-???
+
+# Deployment target, if needed
+# export MACOSX_DEPLOYMENT_TARGET=???
 
 SRC_PATH=$TOP/src
 
 GCC_SRC=$SRC_PATH/gcc-$VERSION
-# override the above version if necessary
-# GCC_SRC=$SRC_PATH/gcc
+# override the above version, if needed
+# GCC_SRC=$SRC_PATH/???
 
 NEW_PATH=$PREFIX/bin:$PATH
 

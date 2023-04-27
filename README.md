@@ -29,7 +29,7 @@ cd <i>package</i>
 
 GCC relies on external maths libraries (e.g. the [GNU Multiple Precision Arithmetic Library][GMP]). To download and set them up, go to the top level of the GCC source directory and say
 ```
-contribs/download_prerequisites
+contrib/download_prerequisites
 ```
 The scripts below build the libraries in both static and relocatable forms.
 
@@ -45,8 +45,8 @@ would be
 * `mpfr.sh`
 * `mpc.sh`
 * `xmlada.sh`
-* `gprbuild.sh`
 * `gprconfig.sh`
+* `gprbuild.sh`
 * `aunit.sh`
 * `gnatcoll-core.sh`
 * `gnatcoll-bindings.sh`

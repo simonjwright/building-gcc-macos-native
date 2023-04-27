@@ -26,7 +26,9 @@ $GCC_SRC/configure                                                      \
   --with-sysroot=                                                       \
   --with-specs="%{!sysroot=*:--sysroot=%:if-exists-else($XCODE $CLU)}"  \
   --with-build-config=no                                                \
-  --enable-bootstrap
+  --enable-bootstrap                                                    \
+   CFLAGS=-Wno-deprecated-declarations                                  \
+   CXXFLAGS=-Wno-deprecated-declarations
 
 make -w -j7
 
