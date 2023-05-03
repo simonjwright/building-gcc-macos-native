@@ -94,7 +94,9 @@ echo "BUILDING THE COMPILER IN $PREFIX"
         --with-ranlib=/usr/bin/ranlib                                        \
         --with-dsymutil=/usr/bin/dsymutil                                    \
         --with-build-config=no                                               \
-        --enable-bootstrap
+        --enable-bootstrap                                                   \
+        CFLAGS=-Wno-deprecated-declarations                                  \
+        CXXFLAGS=-Wno-deprecated-declarations
     
     make -w -j7
 

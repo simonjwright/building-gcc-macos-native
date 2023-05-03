@@ -1,8 +1,8 @@
-This is GCC 12.2.0 built on macOS Ventura (13, Darwin 22) but able to run on Monterey, for Apple silicon (M1), with Command Line Utilities 14.1.0 and Python 3.9.13.
+This is GCC 13.1.0 built on macOS Ventura (13, Darwin 22) but able to run on Monterey, for Apple silicon (M1), with Command Line Utilities 14.2.0 and Python 3.9.13.
 
-**gcc-12.2.0-aarch64-apple-darwin21.pkg**
+**gcc-13.1.0-aarch64-apple-darwin21.pkg**
 
-Compiler sources are from https://github.com/iains/gcc-12-branch at tag `gcc-12.2-darwin-r0`.
+Compiler sources are from https://github.com/iains/gcc-13-branch at tag `gcc-13.1-darwin-r0`.
 
 Compilers included: Ada, C, C++.
 
@@ -25,7 +25,7 @@ Target: aarch64-apple-darwin21
 
 Configured with:
 ```
---prefix=/opt/gcc-12.2.0-aarch64
+--prefix=/opt/gcc-13.1.0-aarch64
 --without-libiconv-prefix
 --disable-libmudflap
 --disable-libstdcxx-pch
@@ -41,9 +41,16 @@ Configured with:
 --without-isl
 --with-build-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 --with-sysroot=
---with-specs='%{!sysroot=*:--sysroot=%:if-exists-else(/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)}'
+--with-specs='%{!sysroot=*:--sysroot=%:if-exists-else(/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)}'
+--with-as=/usr/bin/as
+--with-ld=/usr/bin/ld
+--with-ranlib=/usr/bin/ranlib
+--with-dsymutil=/usr/bin/dsymutil
 --with-build-config=no
 --enable-bootstrap
+CFLAGS=-Wno-deprecated-declarations
+CXXFLAGS=-Wno-deprecated-declarations
 ```
 
 [RLE]: http://www.gnu.org/licenses/gcc-exception-faq.html
@@ -65,13 +72,13 @@ Download the binary `.pkg`. It's not signed, so **don't** double-click on it; in
 
 ### Setting PATH ###
 
-`PATH` needs to be set to include `/opt/gcc-12.2.0-aarch64/bin` at the front:
+`PATH` needs to be set to include `/opt/gcc-13.1.0-aarch64/bin` at the front:
 
 #### `bash` ####
 
 Insert
 ```
-export PATH=/opt/gcc-12.2.0-aarch64/bin:$PATH
+export PATH=/opt/gcc-13.1.0-aarch64/bin:$PATH
 ```
 in your `~/.bash_profile_common`.
 
@@ -85,7 +92,7 @@ See [here][ZSH] for helpful information on moving to `zsh`.
 
 ## Notes ##
 
-The software was built using the [building-gcc-macos-native][BUILDING] scripts at Github, tag `gcc-12.2.0-aarch64`.
+The software was built using the [building-gcc-macos-native][BUILDING] scripts at Github, tag `gcc-13.1.0-aarch64`.
 
 All compilations were done with `export MACOSX_DEPLOYMENT_TARGET=12` so that libraries and executables are compatible with macOS Monterey and later.
 
@@ -160,6 +167,6 @@ This compiler has been built so you don't need to take any related action to use
 
 ## Distribution ##
 
-The distribution was prepared using the [distributing-gcc project][DIST] at Github, tag `gcc-12.2.0-aarch64`.
+The distribution was prepared using the [distributing-gcc project][DIST] at Github, tag `gcc-13.1.0-aarch64`.
 
 [DIST]: https://github.com/simonjwright/distributing-gcc
