@@ -1,7 +1,5 @@
 This is GCC 13.1.0 built on macOS Ventura (13, Darwin 22) but able to run on Monterey, for Apple silicon (M1), with Command Line Utilities 14.2.0 and Python 3.9.13.
 
-**gcc-13.1.0-aarch64-apple-darwin21.pkg**
-
 Compiler sources are from https://github.com/iains/gcc-13-branch at tag `gcc-13.1-darwin-r0`.
 
 Compilers included: Ada, C, C++.
@@ -20,8 +18,6 @@ Tools included (all at version 23.0.0, and all with the  [Runtime Library Except
 * Libadalang tools from https://github.com/AdaCore/libadalang-tools
 * Template Parser from  https://github.com/AdaCore/templates-parser
 * XMLAda from https://github.com/AdaCore/xmlada
-
-Target: aarch64-apple-darwin21
 
 Configured with:
 ```
@@ -119,17 +115,17 @@ index 14d3dc4..26707d7 100644
 +++ b/Makefile.in
 @@ -35,13 +35,9 @@ MODULES=unicode input_sources sax dom schema
  MODULE_INSTALL=${MODULES:%=%_inst}
- 
+
  GPROPTS=-XXMLADA_BUILD_MODE=${MODE} -XPROCESSORS=${PROCESSORS}
 +GPROPTS+=--target=${TARGET_ALIAS}
- 
+
 -ifeq (${HOST},${TARGET})
  IPREFIX=${DESTDIR}${prefix}
 -else
 -GPROPTS+=--target=${TARGET_ALIAS}
 -IPREFIX=${DESTDIR}${prefix}/${TARGET_ALIAS}
 -endif
- 
+
  ifdef RTS
  GPROPTS+=--RTS=${RTS}
 ```
@@ -144,7 +140,7 @@ index d4de8894..6fddd346 100644
 @@ -37,13 +37,7 @@ LIB_DIR       = lib/
  # Load current setup if any
  -include makefile.setup
- 
+
 -# target options for cross-build
 -ifeq ($(HOST),$(TARGET))
 -GTARGET=
@@ -152,10 +148,29 @@ index d4de8894..6fddd346 100644
 -else
  GTARGET=--target=$(TARGET)
 -endif
- 
+
  INSTALLER=$(LIB_INSTALLER)
  EXEC_INSTALLER=$(INSTALLER) -XBUILD=${BUILD}
 ```
+
+and (see [gprbuild issue 141](https://github.com/AdaCore/gprbuild/issues/141))
+
+```
+diff --git a/src/gprlib.adb b/src/gprlib.adb
+index d7547b1d..20abd33a 100644
+--- a/src/gprlib.adb
++++ b/src/gprlib.adb
+@@ -923,7 +923,7 @@ procedure Gprlib is
+          if Separate_Run_Path_Options then
+             for J in 1 .. Rpath.Last_Index loop
+                Options_Table.Append
+-                 (Concat_Paths (Path_Option, " ") & ' ' & Rpath (J));
++                 (Concat_Paths (Path_Option, " ") & Rpath (J));
+             end loop;
+
+          else
+```
+
 
 ### Include, library paths ###
 
@@ -164,9 +179,3 @@ As noted [here][SDKS], Apple have changed the location of system include files a
 This compiler has been built so you don't need to take any related action to use it: unfortunately, this means that paths in `/usr/local` and `/Library/Frameworks` aren't searched.
 
 [SDKS]: https://forward-in-code.blogspot.com/2022/03/which-sdk-choices-choices.html
-
-## Distribution ##
-
-The distribution was prepared using the [distributing-gcc project][DIST] at Github, tag `gcc-13.1.0-aarch64`.
-
-[DIST]: https://github.com/simonjwright/distributing-gcc
