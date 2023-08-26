@@ -12,8 +12,8 @@ TOP=/Volumes/Miscellaneous3
 # override the above version if necessary
 # PREFIX=/opt/gcc-???
 
-# Deployment target, if needed
-# export MACOSX_DEPLOYMENT_TARGET=???
+# Deployment target, if needed - this is Monterey
+export MACOSX_DEPLOYMENT_TARGET=12
 
 SRC_PATH=$TOP/src
 
