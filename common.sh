@@ -3,7 +3,7 @@
 
 set -eu
 
-VERSION=13.1.0
+VERSION=14.0.0
 PREFIX=/opt/gcc-$VERSION
 BUILD=aarch64-apple-darwin21
 
@@ -19,7 +19,7 @@ SRC_PATH=$TOP/src
 
 GCC_SRC=$SRC_PATH/gcc-$VERSION
 # override the above version
-GCC_SRC=$SRC_PATH/gcc-13-branch
+GCC_SRC=$SRC_PATH/gcc-darwin-arm64
 
 NEW_PATH=$PREFIX/bin:$PATH
 
