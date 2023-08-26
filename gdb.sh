@@ -10,6 +10,7 @@ $GDB_PATH/configure                             \
     --build=$BUILD                              \
     --prefix=$PREFIX                            \
     --with-python=no                            \
+    --without-zstd                              \
     --disable-werror
 
 make -w all -j3
