@@ -4,6 +4,10 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 PATH=$NEW_PATH
 
+# To build , specifically the GMP binding, against the just-build
+# libgmp rather than possibly one from HomeBrew.
+export LDFLAGS=-L$PREFIX/lib
+
 cd $GNATCOLL_BINDINGS_SRC
 
 binding="gmp iconv lzma omp python3 readline syslog zlib"
