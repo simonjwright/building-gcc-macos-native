@@ -3,14 +3,14 @@
 
 set -eu
 
-VERSION=13.1.0
+VERSION=14.0.0
 PREFIX=/opt/gcc-$VERSION
 BUILD=x86_64-apple-darwin21
 
 TOP=/Volumes/Miscellaneous3
 
 # override the above version if necessary
-# PREFIX=/opt/gcc-???
+PREFIX=$PREFIX-x86_64
 
 # Deployment target, if needed - this is Monterey
 export MACOSX_DEPLOYMENT_TARGET=12
@@ -19,7 +19,7 @@ SRC_PATH=$TOP/src
 
 GCC_SRC=$SRC_PATH/gcc-$VERSION
 # override the above version, if needed
-# GCC_SRC=$SRC_PATH/???
+GCC_SRC=$SRC_PATH/gcc
 
 NEW_PATH=$PREFIX/bin:$PATH
 

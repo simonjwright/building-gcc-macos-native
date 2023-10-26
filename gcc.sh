@@ -8,7 +8,7 @@ XCODE=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Devel
 CLU=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 
 $GCC_SRC/configure                                                      \
-  --prefix=$PREFIX                                                      \
+  --prefix=$PREFIX-s                                                      \
   --without-libiconv-prefix                                             \
   --disable-libmudflap                                                  \
   --disable-libstdcxx-pch                                               \
@@ -25,11 +25,11 @@ $GCC_SRC/configure                                                      \
   --with-build-sysroot="$(xcrun --show-sdk-path)"                       \
   --with-sysroot=                                                       \
   --with-specs="%{!sysroot=*:--sysroot=%:if-exists-else($XCODE $CLU)}"  \
-  --with-build-config=no                                                \
-  --enable-bootstrap                                                    \
+  --disable-bootstrap                                                    \
+  --enable-host-pie                                                     \
    CFLAGS=-Wno-deprecated-declarations                                  \
    CXXFLAGS=-Wno-deprecated-declarations
 
 make -w -j7
 
-make install
+make -w -j7 install
