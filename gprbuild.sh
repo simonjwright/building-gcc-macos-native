@@ -6,28 +6,29 @@ PATH=$NEW_PATH
 
 rm -rf *
 
-make -f $GPRBUILD_SRC/Makefile                  \
+echo "*** cleaning ***"
+make -w -f $GPRBUILD_SRC/Makefile               \
      TARGET=$BUILD                              \
      ENABLE_SHARED=yes                          \
      clean
 
-make -f $GPRBUILD_SRC/Makefile                  \
+echo "*** setting up ***"
+make -w -f $GPRBUILD_SRC/Makefile               \
      TARGET=$BUILD                              \
      ENABLE_SHARED=yes                          \
      setup
 
+echo "*** building ***"
 make -w -j7                                     \
      -f $GPRBUILD_SRC/Makefile                  \
      all
 
-make -w -j7                                     \
-     -f $GPRBUILD_SRC/Makefile                  \
-     libgpr.build
-
+echo "*** installing ***"
 make -w                                         \
      -f $GPRBUILD_SRC/Makefile                  \
      install
 
+echo "*** installing libgpr ***"
 make -w                                         \
      -f $GPRBUILD_SRC/Makefile                  \
      libgpr.install
