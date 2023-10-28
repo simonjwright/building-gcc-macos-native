@@ -18,20 +18,24 @@ cp -p $GPRCONFIG_SRC/db/* $gprconfig_install_loc/
 
 rm -rf *
 
-make -f $GPRBUILD_SRC/Makefile                  \
+echo "*** cleaning ***"
+make -w -f $GPRBUILD_SRC/Makefile               \
      TARGET=$BUILD                              \
      ENABLE_SHARED=yes                          \
      clean
 
-make -f $GPRBUILD_SRC/Makefile                  \
+echo "*** setting up ***"
+make -w -f $GPRBUILD_SRC/Makefile               \
      TARGET=$BUILD                              \
      ENABLE_SHARED=yes                          \
      setup
 
+echo "*** building ***"
 make -w -j7                                     \
      -f $GPRBUILD_SRC/Makefile                  \
      all
 
+echo "*** installing ***"
 make -w                                         \
      -f $GPRBUILD_SRC/Makefile                  \
      prefix=$GPRBUILD_PREFIX                    \
