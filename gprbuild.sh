@@ -10,7 +10,7 @@ echo "*** cleaning ***"
 make -w -f $GPRBUILD_SRC/Makefile               \
      TARGET=$BUILD                              \
      ENABLE_SHARED=yes                          \
-     clean
+     clean || true  # otherwise, fail because there's no Fortran
 
 echo "*** setting up ***"
 make -w -f $GPRBUILD_SRC/Makefile               \
@@ -22,6 +22,11 @@ echo "*** building ***"
 make -w -j7                                     \
      -f $GPRBUILD_SRC/Makefile                  \
      all
+
+echo "*** building libgpr ***"
+make -w -j7                                     \
+     -f $GPRBUILD_SRC/Makefile                  \
+     libgpr.build
 
 echo "*** installing ***"
 make -w                                         \
