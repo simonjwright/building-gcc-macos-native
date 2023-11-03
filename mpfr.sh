@@ -4,6 +4,8 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 PATH=$NEW_PATH
 
+rm -rf *
+
 $GCC_SRC/mpfr/configure                         \
   --prefix=$PREFIX                              \
   --host=$BUILD                                 \

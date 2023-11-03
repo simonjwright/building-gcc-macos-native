@@ -40,7 +40,6 @@ $GCC_SRC/configure                                                       \
     --with-ld=/usr/bin/ld                                                \
     --with-ranlib=/usr/bin/ranlib                                        \
     --with-dsymutil=/usr/bin/dsymutil                                    \
-    --with-build-config=no                                               \
     --enable-bootstrap                                                   \
     --enable-host-pie                                                    \
     CFLAGS=-Wno-deprecated-declarations                                  \
