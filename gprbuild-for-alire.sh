@@ -1,4 +1,5 @@
-# Build and install gprconfig & gprbuild (but not libgpr) for use in Alire
+# Build and install gprconfig & gprbuild (but not libgpr) for use in
+# Alire, using an existing compiler on PATH.
 
 script_loc=`cd $(dirname $0) && pwd -P`
 
@@ -22,7 +23,7 @@ echo "*** cleaning ***"
 make -w -f $GPRBUILD_SRC/Makefile               \
      TARGET=$BUILD                              \
      ENABLE_SHARED=yes                          \
-     clean
+     clean || true
 
 echo "*** setting up ***"
 make -w -f $GPRBUILD_SRC/Makefile               \
