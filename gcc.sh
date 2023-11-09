@@ -1,4 +1,4 @@
-# Build using extant GCC for aarch64-apple-darwin.
+# Build using extant GCC for x86_64-apple-darwin.
 
 script_loc=`cd $(dirname $0) && pwd -P`
 
@@ -27,9 +27,9 @@ $GCC_SRC/configure                                                       \
     --disable-multilib                                                   \
     --disable-nls                                                        \
     --enable-languages=c,c++,ada                                         \
-    --host=$ARM                                                          \
-    --target=$ARM                                                        \
-    --build=$ARM                                                         \
+    --host=$X86                                                          \
+    --target=$X86                                                        \
+    --build=$X86                                                         \
     --without-isl                                                        \
     --with-build-sysroot=$SDKROOT                                        \
     --with-sysroot=                                                      \
@@ -38,7 +38,7 @@ $GCC_SRC/configure                                                       \
     --with-ld=/usr/bin/ld                                                \
     --with-ranlib=/usr/bin/ranlib                                        \
     --with-dsymutil=/usr/bin/dsymutil                                    \
-    --enable-bootstrap                                                   \
+    --disable-bootstrap                                                   \
     --enable-host-pie                                                    \
     CFLAGS=-Wno-deprecated-declarations                                  \
     CXXFLAGS=-Wno-deprecated-declarations

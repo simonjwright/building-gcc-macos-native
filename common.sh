@@ -5,7 +5,7 @@ set -eu
 
 VERSION=14.0.0
 PREFIX=/opt/gcc-$VERSION
-BUILD=aarch64-apple-darwin21
+BUILD=x86_64-apple-darwin21
 
 # exported so GCC sees it while compiling/linking: Monterey
 export MACOSX_DEPLOYMENT_TARGET=12
@@ -13,13 +13,13 @@ export MACOSX_DEPLOYMENT_TARGET=12
 TOP=/Volumes/Miscellaneous3
 
 # override the above version if necessary
-PREFIX=/opt/gcc-$VERSION-aarch64
+PREFIX=/opt/gcc-$VERSION-20231105
 
 SRC_PATH=$TOP/src
 
 GCC_SRC=$SRC_PATH/gcc-$VERSION
 # override the above version
-GCC_SRC=$SRC_PATH/gcc-darwin-arm64
+GCC_SRC=$SRC_PATH/gcc-14-20231105
 
 NEW_PATH=$PREFIX/bin:$PATH
 
