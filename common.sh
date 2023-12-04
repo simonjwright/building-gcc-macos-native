@@ -3,23 +3,42 @@
 
 set -eu
 
-VERSION=14.0.0
-PREFIX=/opt/gcc-$VERSION
-BUILD=aarch64-apple-darwin21
+VERSION=${VERSION:=13.2.0}
+BUILD=$ARCH-apple-darwin21
+BOOTSTRAP=${BOOTSTRAP:=enable}   # or disable
+
+PYTHON=python3.9
 
 # exported so GCC sees it while compiling/linking: Monterey
 export MACOSX_DEPLOYMENT_TARGET=12
 
 TOP=/Volumes/Miscellaneous3
 
-# override the above version if necessary
-PREFIX=/opt/gcc-$VERSION-aarch64
+# override the default version if necessary
+#  PREFIX=/opt/gcc-$VERSION-20232226-$ARCH
+
+# for gcc-for-alire, gprbuild-for-alire
+PREFIX=$TOP/alire-aarch64/gcc
+
+# the default version
+PREFIX=${PREFIX:-/opt/gcc-$VERSION-$ARCH}
 
 SRC_PATH=$TOP/src
 
-GCC_SRC=$SRC_PATH/gcc-$VERSION
-# override the above version
-GCC_SRC=$SRC_PATH/gcc-darwin-arm64
+# GCC_SRC=$SRC_PATH/gcc
+# that's gcc-mirror
+
+GCC_SRC=$SRC_PATH/gcc-13-branch
+# actual branch in that clone is gcc-13.1-darwin.2, i.e. 13.1.2
+
+#  GCC_SRC=$SRC_PATH/gcc-darwin-arm64
+# that's iains's WIP.
+
+#  GCC_SRC=$SRC_PATH/gcc-14-20231126
+# that's the latest snapshot
+
+# the default version
+GCC_SRC=${GCC_SRC:-$SRC_PATH/gcc-$VERSION}
 
 NEW_PATH=$PREFIX/bin:$PATH
 
