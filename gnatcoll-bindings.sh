@@ -18,15 +18,17 @@ binding="gmp iconv python3 readline syslog zlib"
 for bnd in $binding; do
     (cd $bnd
      set -eu
-     ./setup.py clean
+     rm -f setup.json
+     find . -name \*.o | xargs rm
+     $PYTHON ./setup.py clean
      case $bnd in
          readline)
-             ./setup.py build --accept-gpl --reconfigure
+             $PYTHON ./setup.py build --accept-gpl --reconfigure
              ;;
          *)
-             ./setup.py build --reconfigure
+             $PYTHON ./setup.py build --reconfigure
              ;;
      esac
-     ./setup.py install
+     $PYTHON ./setup.py install
     )
 done

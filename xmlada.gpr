@@ -1,0 +1,17 @@
+--  This project file is used in the build of gprbuild for Alire.
+--  It just picks up the XMLAda sources, without making a library
+--  or supporting installation.
+
+project Xmlada is
+
+   Base := external ("XMLADA_SRC");
+
+   for Source_Dirs use
+     (Base & "/dom",
+      Base & "/input_sources",
+      Base & "/sax",
+      Base & "/schema",
+      Base & "/unicode",
+      Base & "/unicode/importer");
+
+end Xmlada;

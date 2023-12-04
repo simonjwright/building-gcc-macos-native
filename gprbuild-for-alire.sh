@@ -7,7 +7,8 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 PATH=$NEW_PATH
 
-GPRBUILD_PREFIX=$TOP/alire-aarch64/gprbuild
+# build next to gcc
+GPRBUILD_PREFIX=$PREFIX/../gprbuild
 
 # Install gprconfig first.
 
@@ -19,6 +20,14 @@ cp -p $GPRCONFIG_SRC/db/* $gprconfig_install_loc/
 
 rm -rf *
 
+# We're going to use our own xmlada.gpr (we can't use the one that
+# xmlada would install with the compiler, because it's an aggregate;
+# we only want a static build anyway).
+GPR_PROJECT_PATH=$script_loc
+# That xmlada.gpr needs $XMLADA_SRC, but it's only a local variable so
+# far because common.sh is sourced.
+export XMLADA_SRC
+
 echo "*** cleaning ***"
 make -w -f $GPRBUILD_SRC/Makefile               \
      TARGET=$BUILD                              \
@@ -27,6 +36,7 @@ make -w -f $GPRBUILD_SRC/Makefile               \
 
 echo "*** setting up ***"
 make -w -f $GPRBUILD_SRC/Makefile               \
+     GPR_PROJECT_PATH=$GPR_PROJECT_PATH         \
      TARGET=$BUILD                              \
      ENABLE_SHARED=yes                          \
      setup
@@ -34,11 +44,13 @@ make -w -f $GPRBUILD_SRC/Makefile               \
 echo "*** building ***"
 make -w -j7                                     \
      -f $GPRBUILD_SRC/Makefile                  \
+     GPR_PROJECT_PATH=$GPR_PROJECT_PATH         \
      all
 
 echo "*** installing ***"
 make -w                                         \
      -f $GPRBUILD_SRC/Makefile                  \
+     GPR_PROJECT_PATH=$GPR_PROJECT_PATH         \
      prefix=$GPRBUILD_PREFIX                    \
      install
 

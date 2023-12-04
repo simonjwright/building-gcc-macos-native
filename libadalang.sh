@@ -5,7 +5,7 @@ script_loc=`cd $(dirname $0) && pwd -P`
 PATH=$NEW_PATH
 
 rm -rf venv
-python3.9 -m venv venv
+$PYTHON -m venv venv
 
 source venv/bin/activate
 
