@@ -32,12 +32,9 @@ else
   endif
 endif
 
-# test:
-# 	@echo "current_arch=$(current_arch)"
-# 	@echo "aarch64=$(aarch64), x86_64=$(x86_64)"
-# 	@echo "ARCH=$(ARCH)"
-
-last: libadalang-tools
+# This doesn't build the -for-alire targets, or mpfr, mpc, for which
+# there aren't any bindings.
+all: libadalang-tools gnatcoll-db
 
 gcc: gcc-stamp
 .PHONY: gcc
