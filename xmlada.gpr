@@ -14,4 +14,7 @@ project Xmlada is
       Base & "/unicode",
       Base & "/unicode/importer");
 
+   --  the aarch64 build didn't seem to need this; the x86_64 build does.
+   for Object_Dir use external ("TMPDIR") & "/xmlada";
+
 end Xmlada;

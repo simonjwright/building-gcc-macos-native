@@ -58,7 +58,7 @@ Assuming you've got this directory in `~/building-gcc-macos-native`, all your so
  make -f ~/building-gcc-macos-native/Makefile gprbuild \
      VERSION=13.2.1 BOOTSTRAP=disable
 ```
-The individual cmponents will appear in `gcc/`, `gprconfig`, `xmlada` and `gprbuild`.
+The individual components will appear in `gcc/`, `gprconfig/`, `xmlada/` and `gprbuild/`.
 
 ### Additional considerations for sources ###
 

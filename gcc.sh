@@ -8,7 +8,7 @@ XCODE=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Devel
 CLT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 
 SDKROOT=$(xcrun --show-sdk-path)
-SHIM=/usr/local/bin/ld-shim
+BUGURL=https://github.com/simonjwright/building-gcc-macos-native
 
 echo "BUILDING THE COMPILER IN $PREFIX"
 
@@ -18,7 +18,6 @@ rm -rf *
 $GCC_SRC/configure                                                       \
     --prefix=$PREFIX                                                     \
     --without-libiconv-prefix                                            \
-    --disable-libgomp                                                    \
     --disable-libmudflap                                                 \
     --disable-libstdcxx-pch                                              \
     --disable-libsanitizer                                               \
@@ -34,13 +33,11 @@ $GCC_SRC/configure                                                       \
     --with-build-sysroot=$SDKROOT                                        \
     --with-sysroot=                                                      \
     --with-specs="%{!sysroot=*:--sysroot=%:if-exists-else($XCODE $CLT)}" \
+    --with-bugurl=$BUGURL                                                \
     --$BOOTSTRAP-bootstrap                                               \
     --enable-host-pie                                                    \
     CFLAGS=-Wno-deprecated-declarations                                  \
     CXXFLAGS=-Wno-deprecated-declarations
-
-#  --with-ld=$SHIM                                                      \
-#
 
 make -w -j7
 
