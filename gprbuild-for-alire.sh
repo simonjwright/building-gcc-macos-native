@@ -32,7 +32,7 @@ echo "*** cleaning ***"
 make -w -f $GPRBUILD_SRC/Makefile               \
      TARGET=$BUILD                              \
      ENABLE_SHARED=yes                          \
-     clean || true
+     clean || true  # otherwise, fail because there's no Fortran
 
 echo "*** setting up ***"
 make -w -f $GPRBUILD_SRC/Makefile               \
