@@ -6,16 +6,26 @@ PATH=$NEW_PATH
 
 # N.B. the upstream Makefile isn't a reference for good practice!
 
-make -w -C $LIBADALANG_TOOLS_SRC clean
-
-gprinstall --prefix=$PREFIX --uninstall liblal_tools || true
-
 # Have to use BUILD_MODE=prod to avoid a warning-treated-as-error
+
+make -w -C $LIBADALANG_TOOLS_SRC                \
+     ALL_LIBRARY_TYPES=relocatable              \
+     LIBRARY_TYPE=relocatable                   \
+     BUILD_MODE=prod                            \
+     clean
+
+gprinstall --prefix=$PREFIX --uninstall lal_tools || true
+
+make -w -C $LIBADALANG_TOOLS_SRC                \
+     ALL_LIBRARY_TYPES=relocatable              \
+     BUILD_MODE=prod                            \
+     lib
+
 make -w -C $LIBADALANG_TOOLS_SRC                \
      ALL_LIBRARY_TYPES=relocatable              \
      BUILD_MODE=prod                            \
      DESTDIR=$PREFIX                            \
-     lib install-lib
+     install-lib
 
 make -w -C $LIBADALANG_TOOLS_SRC                \
      ALL_LIBRARY_TYPES=relocatable              \

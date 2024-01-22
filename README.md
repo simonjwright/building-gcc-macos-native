@@ -64,7 +64,7 @@ The individual components will appear in `gcc/`, `gprconfig/`, `xmlada/` and `gp
 
 * GCC relies on external maths libraries. To download and set them up, go to the top level of the GCC source directory and say
 ```
-contribs/download_prerequisites
+contrib/download_prerequisites
 ```
 * *XML/Ada* requires *gprbuild*. In order to have built GCC, you must have had a compatible GNAT on your `PATH` already. Assuming that that GNAT contains a *gprbuild*, that should do (for example, the GCC 8.1.0 *XML/Ada* built OK with the GCC 7.1.0 *gprbuild*). If not, check out `bootstrap.sh` in the *gprbuild* sources.
 * `gprbuild`: update `{gprbuild}/gpr/src/gpr-version.ads` to match the current release state.
