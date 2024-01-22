@@ -12,7 +12,7 @@ make distclean || true
   --prefix=$PREFIX                              \
   --target=$BUILD                               \
   --enable-shared                               \
-  PACKAGE_VERSION=v23.0.0
+  PACKAGE_VERSION=v24.0.0
 
 make -w -j7
 

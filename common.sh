@@ -25,10 +25,13 @@ PREFIX=${PREFIX:-/opt/gcc-$VERSION-$ARCH}
 
 SRC_PATH=$TOP/src
 
+GCC_SRC=$SRC_PATH/gcc-14-20240114
+# that's a snapshot
+
 # GCC_SRC=$SRC_PATH/gcc
 # that's gcc-mirror
 
-GCC_SRC=$SRC_PATH/gcc-13-branch
+#  GCC_SRC=$SRC_PATH/gcc-13-branch
 # actual branch in that clone is gcc-13.2-darwin.r0, i.e. 13.2.0
 
 #  GCC_SRC=$SRC_PATH/gcc-darwin-arm64
@@ -42,15 +45,18 @@ GCC_SRC=${GCC_SRC:-$SRC_PATH/gcc-$VERSION}
 
 NEW_PATH=$PREFIX/bin:$PATH
 
+ADASAT_SRC=$SRC_PATH/AdaSAT
 AUNIT_SRC=$SRC_PATH/aunit
 GDB_PATH=$SRC_PATH/binutils-gdb
 GNATCOLL_BINDINGS_SRC=$SRC_PATH/gnatcoll-bindings
 GNATCOLL_CORE_SRC=$SRC_PATH/gnatcoll-core
 GNATCOLL_DB_SRC=$SRC_PATH/gnatcoll-db
+GPR2_SRC=$SRC_PATH/gpr
 GPRBUILD_SRC=$SRC_PATH/gprbuild
 GPRCONFIG_SRC=$SRC_PATH/gprconfig_kb
 LANGKIT_SRC=$SRC_PATH/langkit
 LIBADALANG_SRC=$SRC_PATH/libadalang
 LIBADALANG_TOOLS_SRC=$SRC_PATH/libadalang-tools
 TEMPLATES_PARSER_SRC=$SRC_PATH/templates-parser
+VSS_SRC=$SRC_PATH/VSS
 XMLADA_SRC=$SRC_PATH/xmlada

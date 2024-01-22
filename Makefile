@@ -34,7 +34,8 @@ endif
 
 # This doesn't build the -for-alire targets, or mpfr, mpc, for which
 # there aren't any bindings.
-all: libadalang-tools gnatcoll-db
+all: basic libadalang-tools
+basic: aunit gnatcoll-bindings gnatcoll-db
 
 gcc: gcc-stamp
 .PHONY: gcc
@@ -88,7 +89,7 @@ xmlada-stamp: gprconfig-stamp $(location)/common.sh $(location)/xmlada.sh
 
 gprbuild: gprbuild-stamp
 .PHONY: gprbuild
-gprbuild-stamp: xmlada-stamp $(location)/common.sh $(location)/gprbuild.sh
+gprbuild-stamp: xmlada-stamp gprconfig-stamp $(location)/common.sh $(location)/gprbuild.sh
 	rm -f $@
 	-mkdir gprbuild
 	(cd gprbuild; $(location)/gprbuild.sh) && touch $@
@@ -132,9 +133,35 @@ gnatcoll-db-stamp: gnatcoll-core-stamp $(location)/common.sh $(location)/gnatcol
 	-mkdir gnatcoll-db
 	(cd gnatcoll-db; $(location)/gnatcoll-db.sh) && touch $@
 
+adasat: adasat-stamp
+.PHONY: adasat
+adasat-stamp: gprbuild-stamp $(location)/common.sh $(location)/adasat.sh
+	rm -f $@
+	-mkdir adasat
+	(cd adasat; $(location)/adasat.sh) && touch $@
+
+langkit: langkit-stamp
+.PHONY: langkit
+langkit-stamp: gprbuild-stamp $(location)/common.sh $(location)/langkit.sh
+	rm -f $@
+	-mkdir langkit
+	(cd langkit; $(location)/langkit.sh) && touch $@
+
+gpr2: gpr2-stamp
+.PHONY: gpr2
+gpr2-stamp: langkit-stamp $(location)/common.sh $(location)/gpr2.sh
+	rm -f $@
+	-mkdir gpr2
+	(cd gpr2; $(location)/gpr2.sh) && touch $@
+
 libadalang: libadalang-stamp
 .PHONY: libadalang
-libadalang-stamp: gnatcoll-bindings-stamp $(location)/common.sh $(location)/libadalang.sh
+libadalang-stamp:					\
+	gnatcoll-bindings-stamp				\
+	adasat-stamp					\
+	langkit-stamp					\
+	gpr2-stamp					\
+	$(location)/common.sh $(location)/libadalang.sh
 	rm -f $@
 	-mkdir libadalang
 	(cd libadalang; $(location)/libadalang.sh) && touch $@
@@ -146,9 +173,16 @@ templates-parser-stamp: gprbuild-stamp $(location)/common.sh $(location)/templat
 	-mkdir templates-parser
 	(cd templates-parser; $(location)/templates-parser.sh) && touch $@
 
+vss: vss-stamp
+.PHONY: vss
+vss-stamp: gprbuild-stamp $(location)/common.sh $(location)/vss.sh
+	rm -f $@
+	-mkdir vss
+	(cd vss; $(location)/vss.sh) && touch $@
+
 libadalang-tools: libadalang-tools-stamp
 .PHONY: libadalang-tools
-libadalang-tools-stamp: libadalang-stamp templates-parser-stamp $(location)/common.sh $(location)/libadalang-tools.sh
+libadalang-tools-stamp: libadalang-stamp templates-parser-stamp vss-stamp $(location)/common.sh $(location)/libadalang-tools.sh
 	rm -f $@
 	-mkdir libadalang-tools
 	(cd libadalang-tools; $(location)/libadalang-tools.sh) && touch $@
