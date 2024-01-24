@@ -186,3 +186,10 @@ libadalang-tools-stamp: libadalang-stamp templates-parser-stamp vss-stamp $(loca
 	rm -f $@
 	-mkdir libadalang-tools
 	(cd libadalang-tools; $(location)/libadalang-tools.sh) && touch $@
+
+####################################
+
+images : make-dependencies.png
+
+%.png: %.dot
+	dot -o $@ -T png $<

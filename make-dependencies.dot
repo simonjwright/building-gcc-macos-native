@@ -1,4 +1,12 @@
 digraph {
+all [style=dotted]
+basic [style=dotted]
+
+all -> basic
+all -> libadalang_tools
+basic -> aunit
+basic -> gnatcoll_bindings
+basic -> gnatcoll_db
 adasat -> gprbuild
 aunit -> gprbuild
 gcc

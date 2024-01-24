@@ -8,22 +8,8 @@ This set of scripts supports building GCC Ada, or GNAT, on macOS as a native com
 
 Building is done in a set of shell scripts. The scripts are to some extent order-dependent, and this is catered for here by a Makefile.
 
-The Makefile's targets are 
-* `gcc`
-* `gmp`
-* `mpfr`
-* `mpc`
-* `gprconfig`
-* `xmlada`
-* `gprbuild`
-* `aunit`
-* `gnatcoll-core`
-* `gnatcoll-bindings`
-* `gnatcoll-db`
-* `libadalang`
-* `templates-parser`
-* `libadalang-tools`
-* `all`
+The Makefile's targets are shown in the diagram (_all_ and _basic_ are organisational, _basic_ builds everything except the _libadalang_-related components).
+![Dependencies](make-dependencies.png)
 
 Also, to support in particular `aarch64` builds of the two compiler components for Alire,
 * `gcc-for-alire`
