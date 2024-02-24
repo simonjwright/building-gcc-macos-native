@@ -4,7 +4,7 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 PATH=$NEW_PATH
 
-make -w -j7                                     \
+make -w -j$CORES                                \
      -C $AUNIT_SRC                              \
      clean all
 

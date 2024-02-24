@@ -14,6 +14,6 @@ make distclean || true
   --enable-shared                               \
   PACKAGE_VERSION=v24.0.0
 
-make -w -j7
+make -w -j$CORES
 
 make -w install

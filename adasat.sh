@@ -10,7 +10,7 @@ gprclean -p -P $ADASAT_SRC/adasat.gpr           \
          -XBUILD_MODE=prod                      \
          -XADASAT_LIBRARY_TYPE=relocatable
 
-gprbuild -p -P $ADASAT_SRC/adasat.gpr           \
+gprbuild -p -j$CORES -P $ADASAT_SRC/adasat.gpr  \
          -XBUILD_MODE=prod                      \
          -XADASAT_LIBRARY_TYPE=relocatable
 

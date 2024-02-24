@@ -25,6 +25,7 @@ $GCC_SRC/configure                                                       \
     --disable-libcilkrts                                                 \
     --disable-multilib                                                   \
     --disable-nls                                                        \
+    --disable-libgomp                                                    \
     --enable-languages=c,c++,ada                                         \
     --host=$BUILD                                                        \
     --target=$BUILD                                                      \
@@ -39,6 +40,6 @@ $GCC_SRC/configure                                                       \
     CFLAGS=-Wno-deprecated-declarations                                  \
     CXXFLAGS=-Wno-deprecated-declarations
 
-make -w -j7
+make -w -j$CORES
 
-make -w -j7 install
+make -w -j$CORES install

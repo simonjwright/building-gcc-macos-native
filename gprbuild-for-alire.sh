@@ -5,8 +5,6 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
-PATH=$NEW_PATH
-
 # build next to gcc
 GPRBUILD_PREFIX=$PREFIX/../gprbuild
 
@@ -42,7 +40,7 @@ make -w -f $GPRBUILD_SRC/Makefile               \
      setup
 
 echo "*** building ***"
-make -w -j7                                     \
+make -w -j$CORES                                \
      -f $GPRBUILD_SRC/Makefile                  \
      GPR_PROJECT_PATH=$GPR_PROJECT_PATH         \
      all

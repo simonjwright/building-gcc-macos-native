@@ -12,7 +12,7 @@ make -f $GNATCOLL_CORE_SRC/Makefile             \
      setup
 
 make -w                                         \
-     -j7                                        \
+     -j$CORES                                   \
      -f $GNATCOLL_CORE_SRC/Makefile
 
 make -w                                         \

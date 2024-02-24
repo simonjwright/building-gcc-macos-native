@@ -19,12 +19,12 @@ make -w -f $GPRBUILD_SRC/Makefile               \
      setup
 
 echo "*** building ***"
-make -w -j7                                     \
+make -w -j$CORES                                \
      -f $GPRBUILD_SRC/Makefile                  \
      all
 
 echo "*** building libgpr ***"
-make -w -j7                                     \
+make -w -j$CORES                                \
      -f $GPRBUILD_SRC/Makefile                  \
      libgpr.build
 

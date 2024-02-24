@@ -39,6 +39,6 @@ $GCC_SRC/configure                                                       \
     CFLAGS=-Wno-deprecated-declarations                                  \
     CXXFLAGS=-Wno-deprecated-declarations
 
-make -w -j7
+make -w -j$CORES
 
-make -w -j7 install
+make -w -j$CORES install

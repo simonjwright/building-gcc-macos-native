@@ -8,11 +8,17 @@ BUILD=$ARCH-apple-darwin21
 BOOTSTRAP=${BOOTSTRAP:=enable}   # or disable
 
 PYTHON=python3.9
+CORES=$(sysctl -n hw.ncpu)
 
 # exported so GCC sees it while compiling/linking: Monterey
 export MACOSX_DEPLOYMENT_TARGET=12
 
 TOP=/Volumes/Miscellaneous3
+
+# Investigating when the Xcode problem got fixed -- x86_64
+#  SNAPSHOT=20230910
+
+#  PREFIX=$TOP/x86_64/xc/$SNAPSHOT
 
 # override the default version if necessary
 #  PREFIX=/opt/gcc-$VERSION-20232226-$ARCH
@@ -25,9 +31,6 @@ PREFIX=${PREFIX:-/opt/gcc-$VERSION-$ARCH}
 
 SRC_PATH=$TOP/src
 
-GCC_SRC=$SRC_PATH/gcc-14-20240114
-# that's a snapshot
-
 # GCC_SRC=$SRC_PATH/gcc
 # that's gcc-mirror
 
@@ -37,8 +40,11 @@ GCC_SRC=$SRC_PATH/gcc-14-20240114
 #  GCC_SRC=$SRC_PATH/gcc-darwin-arm64
 # that's iains's WIP.
 
-#  GCC_SRC=$SRC_PATH/gcc-14-20231126
+GCC_SRC=$SRC_PATH/gcc-14-20240218
 # that's the latest snapshot
+
+#  GCC_SRC=$SRC_PATH/gcc-14-$SNAPSHOT
+# Investigating when the Xcode problem got fixed
 
 # the default version
 GCC_SRC=${GCC_SRC:-$SRC_PATH/gcc-$VERSION}
@@ -47,7 +53,7 @@ NEW_PATH=$PREFIX/bin:$PATH
 
 ADASAT_SRC=$SRC_PATH/AdaSAT
 AUNIT_SRC=$SRC_PATH/aunit
-GDB_PATH=$SRC_PATH/binutils-gdb
+GDB_SRC=$SRC_PATH/binutils-gdb
 GNATCOLL_BINDINGS_SRC=$SRC_PATH/gnatcoll-bindings
 GNATCOLL_CORE_SRC=$SRC_PATH/gnatcoll-core
 GNATCOLL_DB_SRC=$SRC_PATH/gnatcoll-db

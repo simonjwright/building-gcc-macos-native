@@ -14,6 +14,6 @@ $GCC_SRC/gmp/configure                          \
   --enable-cxx                                  \
   --enable-shared
 
-make -w -j7
+make -w -j$CORES
 
 make install

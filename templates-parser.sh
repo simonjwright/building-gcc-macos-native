@@ -8,7 +8,20 @@ PATH=$NEW_PATH
 
 make -w -C $TEMPLATES_PARSER_SRC clean
 
+# Have to separate the following, because install doesn't depend on
+# build. Not sure about setup, but won't take long.
+
 make -w -C $TEMPLATES_PARSER_SRC                \
      DEFAULT_LIBRARY_TYPE=relocatable           \
      prefix=$PREFIX                             \
-     setup build install
+     setup
+
+make -w-j$CORES -C $TEMPLATES_PARSER_SRC        \
+     DEFAULT_LIBRARY_TYPE=relocatable           \
+     prefix=$PREFIX                             \
+     build
+
+make -w -C $TEMPLATES_PARSER_SRC                \
+     DEFAULT_LIBRARY_TYPE=relocatable           \
+     prefix=$PREFIX                             \
+     install
