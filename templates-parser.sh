@@ -16,7 +16,7 @@ make -w -C $TEMPLATES_PARSER_SRC                \
      prefix=$PREFIX                             \
      setup
 
-make -w-j$CORES -C $TEMPLATES_PARSER_SRC        \
+make -w -j$CORES -C $TEMPLATES_PARSER_SRC        \
      DEFAULT_LIBRARY_TYPE=relocatable           \
      prefix=$PREFIX                             \
      build
