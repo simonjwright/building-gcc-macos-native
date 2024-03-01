@@ -26,6 +26,9 @@ TOP=/Volumes/Miscellaneous3
 # for gcc-for-alire, gprbuild-for-alire
 #  PREFIX=$TOP/alire-$ARCH/gcc
 
+PREFIX=$TOP/$ARCH/gcc-$VERSION-$ARCH
+# To keep the build away from the eventual target
+
 # the default version
 PREFIX=${PREFIX:-/opt/gcc-$VERSION-$ARCH}
 
@@ -37,10 +40,10 @@ SRC_PATH=$TOP/src
 #  GCC_SRC=$SRC_PATH/gcc-13-branch
 # actual branch in that clone is gcc-13.2-darwin.r0, i.e. 13.2.0
 
-#  GCC_SRC=$SRC_PATH/gcc-darwin-arm64
+GCC_SRC=$SRC_PATH/gcc-darwin-arm64
 # that's iains's WIP.
 
-GCC_SRC=$SRC_PATH/gcc-14-20240218
+#  GCC_SRC=$SRC_PATH/gcc-14-20240218
 # that's the latest snapshot
 
 #  GCC_SRC=$SRC_PATH/gcc-14-$SNAPSHOT

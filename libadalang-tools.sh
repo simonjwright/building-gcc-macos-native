@@ -27,7 +27,7 @@ make -w -C $LIBADALANG_TOOLS_SRC                \
      DESTDIR=$PREFIX                            \
      install-lib
 
-make -w -j$CORES -C $LIBADALANG_TOOLS_SRC        \
+make -w -j$CORES -C $LIBADALANG_TOOLS_SRC       \
      ALL_LIBRARY_TYPES=relocatable              \
      LIBRARY_TYPE=relocatable                   \
      BUILD_MODE=prod                            \

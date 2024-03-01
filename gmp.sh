@@ -16,4 +16,10 @@ $GCC_SRC/gmp/configure                          \
 
 make -w -j$CORES
 
+for lib in .libs/*.dylib; do
+    if [[ $(file $lib) == *shared\ library* ]]; then
+        bash $script_loc/fix_library_rpaths.sh $lib
+    fi
+done
+
 make install

@@ -43,3 +43,16 @@ $GCC_SRC/configure                                                       \
 make -w -j$CORES
 
 make -w -j$CORES install
+
+for exe in $PREFIX/bin/*; do
+    if [[ $(file $exe) == *executable* ]]; then
+        bash $script_loc/fix_executable_rpaths.sh $exe
+    fi
+done
+
+for lib in $PREFIX/lib/*.dylib; do
+    if [[ $(file $lib) == *shared\ library* ]]; then
+        bash $script_loc/fix_library_rpaths.sh $lib
+    fi
+done
+
