@@ -10,50 +10,72 @@ BOOTSTRAP=${BOOTSTRAP:=enable}   # or disable
 PYTHON=python3.9
 CORES=$(sysctl -n hw.ncpu)
 
-# exported so GCC sees it while compiling/linking: Monterey
+# Exported so GCC sees it while compiling/linking: Monterey
 export MACOSX_DEPLOYMENT_TARGET=12
 
+######################################################################
+# Where's the build going to be targeted?
+# There are various possibilities, which, if set, will override the
+# default.
+
+# Override the default version if necessary
+# PREFIX=/opt/gcc-$VERSION-20232226-$ARCH
+
+# For gcc-for-alire, gprbuild-for-alire
+# PREFIX=$TOP/alire-$ARCH/gcc
+
+# To keep the build away from the eventual target (this assumes the
+# code is relocatable! which, now, it is.
+PREFIX=$TOP/$ARCH/gcc-$VERSION-$ARCH
+
+# The default version (e.g. /opt-gcc-13.2.0-x86_64) is overridable.
+PREFIX=${PREFIX:-/opt/gcc-$VERSION-$ARCH}
+######################################################################
+
+######################################################################
+# Where is the source stored?
+
+# Everything is under this directory (it's an external USB disk, named
+# Miscellaneous3). I do the builds on this disk, too, with the thought
+# that it should reduce wear on the system disk.
 TOP=/Volumes/Miscellaneous3
 
-# Investigating when the Xcode problem got fixed -- x86_64
-#  SNAPSHOT=20230910
-
-#  PREFIX=$TOP/x86_64/xc/$SNAPSHOT
-
-# override the default version if necessary
-#  PREFIX=/opt/gcc-$VERSION-20232226-$ARCH
-
-# for gcc-for-alire, gprbuild-for-alire
-#  PREFIX=$TOP/alire-$ARCH/gcc
-
-PREFIX=$TOP/$ARCH/gcc-$VERSION-$ARCH
-# To keep the build away from the eventual target
-
-# the default version
-PREFIX=${PREFIX:-/opt/gcc-$VERSION-$ARCH}
-
+#This assumes that all the source has been extracted under the one
+# directory.
 SRC_PATH=$TOP/src
 
+#---------------------------------------------------------------------
+# GCC source; there are lots of compiler options.
+
+# Building gcc-mirror
 # GCC_SRC=$SRC_PATH/gcc
-# that's gcc-mirror
 
-#  GCC_SRC=$SRC_PATH/gcc-13-branch
-# actual branch in that clone is gcc-13.2-darwin.r0, i.e. 13.2.0
+# Building gcc-13 for aarch64; the actual branch in that clone is
+# gcc-13.2-darwin.r0, i.e. 13.2.0
+# GCC_SRC=$SRC_PATH/gcc-13-branch
 
-GCC_SRC=$SRC_PATH/gcc-darwin-arm64
-# that's iains's WIP.
+# Building iains's WIP for aarch64, gcc-14.0.1
+# GCC_SRC=$SRC_PATH/gcc-darwin-arm64
 
-#  GCC_SRC=$SRC_PATH/gcc-14-20240218
-# that's the latest snapshot
+# Building the latest FSF snapshot
+# SNAPSHOT=20240226
+# GCC_SRC=$SRC_PATH/gcc-14-$SNAPSHOT
 
-#  GCC_SRC=$SRC_PATH/gcc-14-$SNAPSHOT
-# Investigating when the Xcode problem got fixed
-
-# the default version
+# The default for an FSF releaase
 GCC_SRC=${GCC_SRC:-$SRC_PATH/gcc-$VERSION}
+#---------------------------------------------------------------------
 
+#---------------------------------------------------------------------
+# Pick up the new compiler for building all the other components
 NEW_PATH=$PREFIX/bin:$PATH
+#---------------------------------------------------------------------
 
+#---------------------------------------------------------------------
+# Where all the other component sources are to be found. I use Git
+# clones mostly, in case I need to patch them, but you may prefer to
+# use releases. As an example, gnatcoll-db's 23.0.0 release unpacks to
+# gnatcoll-db-23.0.0/, whereas a clone would naturally unpack to just
+# gnatcoll-db/ as below.
 ADASAT_SRC=$SRC_PATH/AdaSAT
 AUNIT_SRC=$SRC_PATH/aunit
 GDB_SRC=$SRC_PATH/binutils-gdb
@@ -69,3 +91,6 @@ LIBADALANG_TOOLS_SRC=$SRC_PATH/libadalang-tools
 TEMPLATES_PARSER_SRC=$SRC_PATH/templates-parser
 VSS_SRC=$SRC_PATH/VSS
 XMLADA_SRC=$SRC_PATH/xmlada
+#---------------------------------------------------------------------
+
+######################################################################

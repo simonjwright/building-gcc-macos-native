@@ -21,7 +21,7 @@ Additionally, the script `gdb.sh` builds GDB (not useful on aarch64?)
 
 ### Building ###
 
-The common information is in [`common.sh`](common.sh), which is sourced by the other scripts and sets environment variables.
+The common information is in [`common.sh`](common.sh), which is sourced by the other scripts and sets environment variables. Please study `common.sh` and edit for your circumstances.
 
 ### Building on Apple silicon ###
 
@@ -39,7 +39,7 @@ Some variables can be overridden during the `make` invocation:
 * `VERSION`, e.g. `13.2.1` - the default is `13.2.0`. This controls where the built components are installed.
 * `BOOTSTRAP`, e.g. `disable` - the default is `enable`; this controls the GCC build via the `configure` option `--$BOOTSTRAP-bootstrap`.
 
-Assuming you've got this directory in `~/building-gcc-macos-native`, all your source code in <tt>~/gcc-src/<i>package-src</i></tt>, and you're going to build just `gprbuild` under `~/tmp/arch64`, you would say in `~/tmp/aarch64`
+Assuming you've got this directory in `~/building-gcc-macos-native`, all your source code in <tt>~/gcc-src/<i>package-src</i></tt>, `common.sh` is set up,and you're going to build just `gprbuild` under `~/tmp/arch64`, you would say in `~/tmp/aarch64`
 ```
  make -f ~/building-gcc-macos-native/Makefile gprbuild \
      VERSION=13.2.1 BOOTSTRAP=disable
