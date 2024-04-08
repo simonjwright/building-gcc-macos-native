@@ -42,3 +42,45 @@ $GCC_SRC/configure                                                       \
 make -w -j$CORES
 
 make -w -j$CORES install
+
+# Install the shim for ld
+# Find the full path name for the C compiler's location
+tool_path=$(dirname $($PREFIX/bin/gcc --print-prog-name=cc1))
+echo "Installing in $tool_path"
+
+# Write our shim there. If we're running a pre-15 SDK, there won't be
+# an ld-classic, so use the standard linker.
+#
+# Need to keep a lookout for SDKs version > 15.
+#
+# We quote the EOF to avoid parameter substitution while writing the
+# document.
+cat >$tool_path/ld <<'EOF'
+#!/bin/sh
+
+classic=$(xcrun --find ld-classic 2>/dev/null) || true
+
+if [ -n "$classic" ]; then
+    exec $classic "$@"
+else
+    exec ld "$@"
+fi
+
+EOF
+
+# It needs to be executable!
+chmod +x $tool_path/ld
+
+# Fix up rpaths.
+for exe in $PREFIX/bin/*; do
+    if [[ $(file $exe) == *executable* ]]; then
+        bash $script_loc/fix_executable_rpaths.sh $exe
+    fi
+done
+
+for lib in $PREFIX/lib/*.dylib; do
+    if [[ $(file $lib) == *shared\ library* ]]; then
+        bash $script_loc/fix_library_rpaths.sh $lib
+    fi
+done
+
