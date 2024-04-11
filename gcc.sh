@@ -25,7 +25,6 @@ $GCC_SRC/configure                                                       \
     --disable-libcilkrts                                                 \
     --disable-multilib                                                   \
     --disable-nls                                                        \
-    --disable-libgomp                                                    \
     --enable-languages=c,c++,ada                                         \
     --host=$BUILD                                                        \
     --target=$BUILD                                                      \

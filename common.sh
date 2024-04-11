@@ -13,6 +13,11 @@ CORES=$(sysctl -n hw.ncpu)
 # Exported so GCC sees it while compiling/linking: Monterey
 export MACOSX_DEPLOYMENT_TARGET=12
 
+# Everything is under this directory (it's an external USB disk, named
+# Miscellaneous3). I do the builds on this disk, too, with the thought
+# that it should reduce wear on the system disk.
+TOP=/Volumes/Miscellaneous3
+
 ######################################################################
 # Where's the build going to be targeted?
 # There are various possibilities, which, if set, will override the
@@ -35,11 +40,6 @@ PREFIX=${PREFIX:-/opt/gcc-$VERSION-$ARCH}
 ######################################################################
 # Where is the source stored?
 
-# Everything is under this directory (it's an external USB disk, named
-# Miscellaneous3). I do the builds on this disk, too, with the thought
-# that it should reduce wear on the system disk.
-TOP=/Volumes/Miscellaneous3
-
 #This assumes that all the source has been extracted under the one
 # directory.
 SRC_PATH=$TOP/src
@@ -55,10 +55,10 @@ SRC_PATH=$TOP/src
 # GCC_SRC=$SRC_PATH/gcc-13-branch
 
 # Building iains's WIP for aarch64, gcc-14.0.1
-# GCC_SRC=$SRC_PATH/gcc-darwin-arm64
+GCC_SRC=$SRC_PATH/gcc-darwin-arm64
 
 # Building the latest FSF snapshot
-# SNAPSHOT=20240226
+# SNAPSHOT=20240407
 # GCC_SRC=$SRC_PATH/gcc-14-$SNAPSHOT
 
 # The default for an FSF releaase

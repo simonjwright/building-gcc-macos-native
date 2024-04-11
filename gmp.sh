@@ -12,7 +12,8 @@ $GCC_SRC/gmp/configure                          \
   --target=$BUILD                               \
   --build=$BUILD                                \
   --enable-cxx                                  \
-  --enable-shared
+  --enable-shared                               \
+  M4=gm4
 
 make -w -j$CORES
 
