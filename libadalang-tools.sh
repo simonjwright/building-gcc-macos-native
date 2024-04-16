@@ -33,6 +33,14 @@ make -w -j$CORES -C $LIBADALANG_TOOLS_SRC       \
      BUILD_MODE=prod                            \
      bin
 
+# The runpaths in executables are unhelpful if $PREFIX isn't a
+# top-level directory, so use @executable_path.
+for f in $(find $LIBADALANG_TOOLS_SRC/bin -type f); do
+    if [[ $(file $f) == *executable* ]]; then
+        $script_loc/fix_executable_rpaths.sh $f
+    fi
+done
+
 # Don't want to do this!
 # make -w -C $SRC_PATH/libadalang-tools install-strip DESTDIR=$PREFIX/bin
 # Instead,
