@@ -3,7 +3,7 @@
 
 set -eu
 
-VERSION=${VERSION:=13.2.0}
+VERSION=${VERSION:=14.1.0}
 BUILD=$ARCH-apple-darwin21
 BOOTSTRAP=${BOOTSTRAP:=enable}   # or disable
 
@@ -50,12 +50,16 @@ SRC_PATH=$TOP/src
 # Building gcc-mirror
 # GCC_SRC=$SRC_PATH/gcc
 
-# Building gcc-13 for aarch64; the actual branch in that clone is
-# gcc-13.2-darwin.r0, i.e. 13.2.0
+# Building gcc-13 for aarch64; the actual tag in that clone is
+# gcc-13-3-darwin-pre-0 !!!
 # GCC_SRC=$SRC_PATH/gcc-13-branch
 
-# Building iains's WIP for aarch64, gcc-14.0.1
-GCC_SRC=$SRC_PATH/gcc-darwin-arm64
+# Building gcc-14 for aarch64; the actual tag in that clone is
+# gcc-14.1-darwin-r0.
+GCC_SRC=$SRC_PATH/gcc-14-branch
+
+# Building iains's WIP for aarch64
+# GCC_SRC=$SRC_PATH/gcc-darwin-arm64
 
 # Building the latest FSF snapshot
 # SNAPSHOT=20240407

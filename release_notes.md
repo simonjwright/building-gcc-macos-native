@@ -1,11 +1,12 @@
-This is GCC 13.1.0 built on macOS Ventura (13, Darwin 22) but able to run on Monterey, for Apple silicon (M1), with Command Line Utilities 14.2.0 and Python 3.9.13.
+This is GCC 14.1.0 built on macOS Sonoma (14, Darwin 23) but able to run on Monterey, for Apple silicon (M1), with Command Line Utilities 15.3.0 and Python 3.9.13.
 
-Compiler sources are from https://github.com/iains/gcc-13-branch at tag `gcc-13.1-darwin-r0`.
+Compiler sources are from https://github.com/iains/gcc-14-branch at tag `gcc-14.1-darwin-r0`.
 
 Compilers included: Ada, C, C++.
 
-Tools included (all at version 23.0.0, and all with the  [Runtime Library Exception][RLE]):
+Tools included (all at version 24.0.0, and all with the  [Runtime Library Exception][RLE]):
 
+* AdaSAT from https://github.com/AdaCore/AdaSAT
 * AUnit from https://github.com/AdaCore/aunit
 * GNATCOLL from:
   * https://github.com/AdaCore/gnatcoll-core
@@ -13,40 +14,40 @@ Tools included (all at version 23.0.0, and all with the  [Runtime Library Except
   * https://github.com/AdaCore/gnatcoll-db (only the SQLite backend)
 * Gprbuild from https://github.com/AdaCore/gprbuild
 * Gprconfig\_kb from https://github.com/AdaCore/gprconfig_kb
+* GPR2 from https://github.com/AdaCore/gpr (but not the tools, some don't quite match the behaviour of corresponding tools in GPRbuild)
 * Langkit from https://github.com/AdaCore/langkit
 * Libadalang from https://github.com/AdaCore/libadalang
 * Libadalang tools from https://github.com/AdaCore/libadalang-tools
-* Template Parser from  https://github.com/AdaCore/templates-parser
+* Templates Parser from  https://github.com/AdaCore/templates-parser
+* VSS from https://github.com/AdaCore/VSS
 * XMLAda from https://github.com/AdaCore/xmlada
 
 Configured with:
 ```
---prefix=/opt/gcc-13.1.0-aarch64
---without-libiconv-prefix
---disable-libmudflap
---disable-libstdcxx-pch
---disable-libsanitizer
---disable-libcc1
---disable-libcilkrts
---disable-multilib
---disable-nls
---enable-languages=c,c++,ada
---host=aarch64-apple-darwin21
---target=aarch64-apple-darwin21
---build=aarch64-apple-darwin21
---without-isl
---with-build-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
---with-sysroot=
---with-specs='%{!sysroot=*:--sysroot=%:if-exists-else(/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)}'
---with-as=/usr/bin/as
---with-ld=/usr/bin/ld
---with-ranlib=/usr/bin/ranlib
---with-dsymutil=/usr/bin/dsymutil
---with-build-config=no
---enable-bootstrap
-CFLAGS=-Wno-deprecated-declarations
-CXXFLAGS=-Wno-deprecated-declarations
+Configured with:
+  --prefix=/Volumes/Miscellaneous3/aarch64/gcc-14.1.0-aarch64
+  --without-libiconv-prefix
+  --disable-libmudflap
+  --disable-libstdcxx-pch
+  --disable-libsanitizer
+  --disable-libcc1
+  --disable-libcilkrts
+  --disable-multilib
+  --disable-nls
+  --enable-languages=c,c++,ada
+  --host=aarch64-apple-darwin21
+  --target=aarch64-apple-darwin21
+  --build=aarch64-apple-darwin21
+  --without-isl
+  --with-build-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+  --with-sysroot=
+  --with-specs='%{!sysroot=*:--sysroot=%:if-exists-else(/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)}'
+  --with-bugurl=https://github.com/simonjwright/building-gcc-macos-native
+  --enable-bootstrap
+  --enable-host-pie
+  CFLAGS=-Wno-deprecated-declarations
+  CXXFLAGS=-Wno-deprecated-declarations
 ```
 
 [RLE]: http://www.gnu.org/licenses/gcc-exception-faq.html
@@ -68,13 +69,13 @@ Download the binary `.pkg`. It's not signed, so **don't** double-click on it; in
 
 ### Setting PATH ###
 
-`PATH` needs to be set to include `/opt/gcc-13.1.0-aarch64/bin` at the front:
+`PATH` needs to be set to include `/opt/gcc-14.1.0-aarch64/bin` at the front:
 
 #### `bash` ####
 
 Insert
 ```
-export PATH=/opt/gcc-13.1.0-aarch64/bin:$PATH
+export PATH=/opt/gcc-14.1.0-aarch64/bin:$PATH
 ```
 in your `~/.bash_profile_common`.
 
@@ -88,7 +89,7 @@ See [here][ZSH] for helpful information on moving to `zsh`.
 
 ## Notes ##
 
-The software was built using the [building-gcc-macos-native][BUILDING] scripts at Github, tag `gcc-13.1.0-aarch64`.
+The software was built using the [building-gcc-macos-native][BUILDING] scripts at Github, tag `gcc-14.1.0-aarch64`.
 
 All compilations were done with `export MACOSX_DEPLOYMENT_TARGET=12` so that libraries and executables are compatible with macOS Monterey and later.
 
@@ -98,13 +99,123 @@ All compilations were done with `export MACOSX_DEPLOYMENT_TARGET=12` so that lib
 
 The compiler is GPL version 3. The runtime has the GCC Runtime Exception, so executables built with it can be released on proprietary terms.
 
-### GMP, MPFR, MPC ###
+### GMP ###
 
-These libraries (releases 6.2.1, 4.1.0, 1.2.1 respectively) are installed with the compiler.
+This library (release 6.2.1) is installed with the compiler.
 
 ### Other sources ###
 
-The following patches to the v23.0.0 versions were needed to allow the builds to see the new compiler.
+The following patches to the v24.0.0 versions were needed to allow the builds to see the new compiler.
+
+#### GNATColl Bindings
+
+```
+diff --git a/python3/setup.py b/python3/setup.py
+index 18a29157..15c00c21 100755
+--- a/python3/setup.py
++++ b/python3/setup.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ import logging
+ import sys
+ import re
+```
+
+#### GPR2
+
+```
+diff --git a/Makefile b/Makefile
+index ce203ff9..82799b1c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -47,7 +47,11 @@ TARGET := $(shell gcc -dumpmachine)
+ #
+ # first let's check if Makefile is symlinked: realpath will return the actual
+ # (after link resolution) relative path of the Makefile from PWD.
++ifeq ($(shell uname -s),Darwin)
++MFILE         := $(shell realpath "$(firstword ${MAKEFILE_LIST})"))
++else
+ MFILE         := $(shell realpath --relative-to=. "$(firstword ${MAKEFILE_LIST})"))
++endif
+ # as Makefile is in the root dir, SOURCE_DIR is just dirname of the Makefile
+ # path above.
+ SOURCE_DIR    := $(shell dirname "${MFILE}")
+```
+
+#### GPRBuild
+
+```
+diff --git a/gpr/src/gpr-version.ads b/gpr/src/gpr-version.ads
+index 4238bedf..60a42c2c 100644
+--- a/gpr/src/gpr-version.ads
++++ b/gpr/src/gpr-version.ads
+@@ -30,17 +30,17 @@
+ 
+ package GPR.Version is
+ 
+-   Gpr_Version : constant String := "18.0w";
++   Gpr_Version : constant String := "24.0.1";
+    --  Static string identifying this version
+ 
+-   Date : constant String := "19940713";
++   Date : constant String := "20240409";
+ 
+-   Current_Year : constant String := "2016";
++   Current_Year : constant String := "2024";
+ 
+    type Gnat_Build_Type is (Gnatpro, FSF, GPL);
+    --  See Get_Gnat_Build_Type below for the meaning of these values
+ 
+-   Build_Type : constant Gnat_Build_Type := Gnatpro;
++   Build_Type : constant Gnat_Build_Type := FSF;
+    --  Kind of GNAT Build:
+    --
+    --    FSF
+```
+
+and (see [gprbuild issue 141](https://github.com/AdaCore/gprbuild/issues/141))
+
+```
+diff --git a/src/gprlib.adb b/src/gprlib.adb
+index aaec038e..edc74f13 100644
+--- a/src/gprlib.adb
++++ b/src/gprlib.adb
+@@ -875,7 +875,7 @@ procedure Gprlib is
+          if Separate_Run_Path_Options then
+             for J in 1 .. Rpath.Last_Index loop
+                Options_Table.Append
+-                 (Concat_Paths (Path_Option, " ") & ' ' & Rpath (J));
++                 (Concat_Paths (Path_Option, " ") & Rpath (J));
+             end loop;
+ 
+          else
+```
+
+#### Libadalang Tools ####
+
+```
+diff --git a/src/utils-versions.ads b/src/utils-versions.ads
+index 11ebb13a..a1fba976 100644
+--- a/src/utils-versions.ads
++++ b/src/utils-versions.ads
+@@ -23,12 +23,12 @@
+ 
+ package Utils.Versions is
+ 
+-   Version      : constant String := "dev";
+-   Current_Year : constant String := "unknown";
++   Version      : constant String := "24.0.0";
++   Current_Year : constant String := "2024";
+ 
+    type Gnat_Build_Type is (Gnatpro, GPL);
+ 
+-   Build_Type : constant Gnat_Build_Type := Gnatpro;
++   Build_Type : constant Gnat_Build_Type := GPL;
+    --  Kind of GNAT Build:
+    --
+    --    Gnatpro
+```
 
 #### XML/Ada ####
 
@@ -115,62 +226,20 @@ index 14d3dc4..26707d7 100644
 +++ b/Makefile.in
 @@ -35,13 +35,9 @@ MODULES=unicode input_sources sax dom schema
  MODULE_INSTALL=${MODULES:%=%_inst}
-
+ 
  GPROPTS=-XXMLADA_BUILD_MODE=${MODE} -XPROCESSORS=${PROCESSORS}
 +GPROPTS+=--target=${TARGET_ALIAS}
-
+ 
 -ifeq (${HOST},${TARGET})
  IPREFIX=${DESTDIR}${prefix}
 -else
 -GPROPTS+=--target=${TARGET_ALIAS}
 -IPREFIX=${DESTDIR}${prefix}/${TARGET_ALIAS}
 -endif
-
+ 
  ifdef RTS
  GPROPTS+=--RTS=${RTS}
 ```
-
-#### Gprbuild ####
-
-```
-diff --git a/Makefile b/Makefile
-index d4de8894..6fddd346 100644
---- a/Makefile
-+++ b/Makefile
-@@ -37,13 +37,7 @@ LIB_DIR       = lib/
- # Load current setup if any
- -include makefile.setup
-
--# target options for cross-build
--ifeq ($(HOST),$(TARGET))
--GTARGET=
--# INSTALLER=exe/$(BUILD)/$(LIB_INSTALLER)
--else
- GTARGET=--target=$(TARGET)
--endif
-
- INSTALLER=$(LIB_INSTALLER)
- EXEC_INSTALLER=$(INSTALLER) -XBUILD=${BUILD}
-```
-
-and (see [gprbuild issue 141](https://github.com/AdaCore/gprbuild/issues/141))
-
-```
-diff --git a/src/gprlib.adb b/src/gprlib.adb
-index d7547b1d..20abd33a 100644
---- a/src/gprlib.adb
-+++ b/src/gprlib.adb
-@@ -923,7 +923,7 @@ procedure Gprlib is
-          if Separate_Run_Path_Options then
-             for J in 1 .. Rpath.Last_Index loop
-                Options_Table.Append
--                 (Concat_Paths (Path_Option, " ") & ' ' & Rpath (J));
-+                 (Concat_Paths (Path_Option, " ") & Rpath (J));
-             end loop;
-
-          else
-```
-
 
 ### Include, library paths ###
 
