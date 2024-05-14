@@ -56,7 +56,7 @@ SRC_PATH=$TOP/src
 
 # Building gcc-14 for aarch64; the actual tag in that clone is
 # gcc-14.1-darwin-r0.
-GCC_SRC=$SRC_PATH/gcc-14-branch
+# GCC_SRC=$SRC_PATH/gcc-14-branch
 
 # Building iains's WIP for aarch64
 # GCC_SRC=$SRC_PATH/gcc-darwin-arm64

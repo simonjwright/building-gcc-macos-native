@@ -1,6 +1,6 @@
-This is GCC 14.1.0 built on macOS Sonoma (14, Darwin 23) but able to run on Monterey, for Apple silicon (M1), with Command Line Utilities 15.3.0 and Python 3.9.13.
+This is GCC 14.1.0 built on macOS Sonoma (14, Darwin 23) but able to run on Monterey, for Intel silicon, with Command Line Utilities 14.2.0 and Python 3.9.13.
 
-Compiler sources are from https://github.com/iains/gcc-14-branch at tag `gcc-14.1-darwin-r0`.
+It will run on Intel Macs, or Apple silicon (M series) Macs under Rosetta.
 
 Compilers included: Ada, C, C++.
 
@@ -25,7 +25,7 @@ Tools included (all at version 24.0.0, and all with the  [Runtime Library Except
 Configured with:
 ```
 Configured with:
-  --prefix=/Volumes/Miscellaneous3/aarch64/gcc-14.1.0-aarch64
+  --prefix=/Volumes/Miscellaneous3/x86_64/gcc-14.1.0-x86_64
   --without-libiconv-prefix
   --disable-libmudflap
   --disable-libstdcxx-pch
@@ -35,9 +35,9 @@ Configured with:
   --disable-multilib
   --disable-nls
   --enable-languages=c,c++,ada
-  --host=aarch64-apple-darwin21
-  --target=aarch64-apple-darwin21
-  --build=aarch64-apple-darwin21
+  --host=x86_64-apple-darwin21
+  --target=x86_64-apple-darwin21
+  --build=x86_64-apple-darwin21
   --without-isl
   --with-build-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
   --with-sysroot=
@@ -69,13 +69,13 @@ Download the binary `.pkg`. It's not signed, so **don't** double-click on it; in
 
 ### Setting PATH ###
 
-`PATH` needs to be set to include `/opt/gcc-14.1.0-aarch64/bin` at the front:
+`PATH` needs to be set to include `/opt/gcc-14.1.0-x86_64/bin` at the front:
 
 #### `bash` ####
 
 Insert
 ```
-export PATH=/opt/gcc-14.1.0-aarch64/bin:$PATH
+export PATH=/opt/gcc-14.1.0-x86_64/bin:$PATH
 ```
 in your `~/.bash_profile_common`.
 
@@ -89,7 +89,7 @@ See [here][ZSH] for helpful information on moving to `zsh`.
 
 ## Notes ##
 
-The software was built using the [building-gcc-macos-native][BUILDING] scripts at Github, tag `gcc-14.1.0-aarch64`.
+The software was built using the [building-gcc-macos-native][BUILDING] scripts at Github, tag `gcc-14.1.0-x86_64`.
 
 All compilations were done with `export MACOSX_DEPLOYMENT_TARGET=12` so that libraries and executables are compatible with macOS Monterey and later.
 
