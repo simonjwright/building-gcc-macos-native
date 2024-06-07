@@ -11,7 +11,7 @@ PYTHON=python3.9
 CORES=$(sysctl -n hw.ncpu)
 
 # Exported so GCC sees it while compiling/linking: Monterey
-export MACOSX_DEPLOYMENT_TARGET=12
+export MACOSX_DEPLOYMENT_TARGET=12.0
 
 # Everything is under this directory (it's an external USB disk, named
 # Miscellaneous3). I do the builds on this disk, too, with the thought
@@ -51,8 +51,8 @@ SRC_PATH=$TOP/src
 # GCC_SRC=$SRC_PATH/gcc
 
 # Building gcc-13 for aarch64; the actual tag in that clone is
-# gcc-13-3-darwin-pre-0 !!!
-# GCC_SRC=$SRC_PATH/gcc-13-branch
+# gcc-13-3-darwin-r0 !!!
+GCC_SRC=$SRC_PATH/gcc-13-branch
 
 # Building gcc-14 for aarch64; the actual tag in that clone is
 # gcc-14.1-darwin-r0.

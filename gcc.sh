@@ -43,6 +43,9 @@ make -w -j$CORES
 
 make -w -j$CORES install
 
+echo "###### NOT INSTALLING GCC SHIM ETC ######"
+exit
+
 # Install the shim for ld
 # Find the full path name for the C compiler's location
 tool_path=$(dirname $($PREFIX/bin/gcc --print-prog-name=cc1))
