@@ -31,7 +31,7 @@ TOP=/Volumes/Miscellaneous3
 
 # To keep the build away from the eventual target (this assumes the
 # code is relocatable! which, now, it is.
-PREFIX=$TOP/$ARCH/gcc-$VERSION-$ARCH
+PREFIX=${PREFIX:-$TOP/$ARCH/gcc-$VERSION-$ARCH}
 
 # The default version (e.g. /opt-gcc-13.2.0-x86_64) is overridable.
 PREFIX=${PREFIX:-/opt/gcc-$VERSION-$ARCH}
@@ -51,12 +51,12 @@ SRC_PATH=$TOP/src
 # GCC_SRC=$SRC_PATH/gcc
 
 # Building gcc-13 for aarch64; the actual tag in that clone is
-# gcc-13-3-darwin-pre-0 !!!
+# gcc-13-3-darwin-r0 !!!
 # GCC_SRC=$SRC_PATH/gcc-13-branch
 
 # Building gcc-14 for aarch64; the actual tag in that clone is
-# gcc-14.1-darwin-r0.
-# GCC_SRC=$SRC_PATH/gcc-14-branch
+# gcc-14.1-darwin-r1.
+GCC_SRC=$SRC_PATH/gcc-14-branch
 
 # Building iains's WIP for aarch64
 # GCC_SRC=$SRC_PATH/gcc-darwin-arm64
