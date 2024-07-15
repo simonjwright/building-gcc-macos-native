@@ -7,6 +7,7 @@ VERSION=${VERSION:=14.1.0}
 BUILD=$ARCH-apple-darwin21
 BOOTSTRAP=${BOOTSTRAP:=enable}   # or disable
 
+SDKROOT=${SDKROOT:-$(xcrun --show-sdk-path)}
 PYTHON=python3.9
 CORES=$(sysctl -n hw.ncpu)
 

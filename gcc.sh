@@ -7,7 +7,6 @@ script_loc=`cd $(dirname $0) && pwd -P`
 XCODE=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
 CLT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 
-SDKROOT=$(xcrun --show-sdk-path)
 BUGURL=https://github.com/simonjwright/building-gcc-macos-native
 
 echo "BUILDING THE COMPILER IN $PREFIX"
@@ -19,8 +18,7 @@ $GCC_SRC/configure                                                       \
     --prefix=$PREFIX                                                     \
     --enable-languages=c,c++,ada                                         \
     --build=$BUILD                                                       \
-    --with-build-sysroot=$SDKROOT                                        \
-    --with-sysroot=                                                      \
+    --with-sysroot=$SDKROOT                                              \
     --with-specs="%{!sysroot=*:--sysroot=%:if-exists-else($XCODE $CLT)}" \
     --with-bugurl=$BUGURL                                                \
     --$BOOTSTRAP-bootstrap
