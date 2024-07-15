@@ -18,11 +18,11 @@ $GCC_SRC/configure                                                       \
     --prefix=$PREFIX                                                     \
     --enable-languages=c,c++,ada                                         \
     --build=$BUILD                                                       \
-    --with-sysroot=$SDKROOT                                              \
+    --with-build-sysroot=$SDKROOT                                        \
+    --with-sysroot=                                                      \
     --with-specs="%{!sysroot=*:--sysroot=%:if-exists-else($XCODE $CLT)}" \
     --with-bugurl=$BUGURL                                                \
     --$BOOTSTRAP-bootstrap
-
 
 make -w -j$CORES
 

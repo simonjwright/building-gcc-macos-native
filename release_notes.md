@@ -1,6 +1,4 @@
-This is GCC 14.1.0 built on macOS Sonoma (14, Darwin 23) but able to run on Monterey, for Intel silicon, with Command Line Utilities 14.2.0 and Python 3.9.13.
-
-It will run on Intel Macs, or Apple silicon (M series) Macs under Rosetta.
+This is GCC 14.1.0 built on macOS Sonoma (14, Darwin 23) but able to run on Monterey, for Apple silicon, with Command Line Utilities 15.3.0 and Python 3.9.13.
 
 Compilers included: Ada, C, C++.
 
@@ -69,13 +67,13 @@ Download the binary `.pkg`. It's not signed, so **don't** double-click on it; in
 
 ### Setting PATH ###
 
-`PATH` needs to be set to include `/opt/gcc-14.1.0-x86_64/bin` at the front:
+`PATH` needs to be set to include `/opt/gcc-14.1.0-1-aarch64/bin` at the front:
 
 #### `bash` ####
 
 Insert
 ```
-export PATH=/opt/gcc-14.1.0-x86_64/bin:$PATH
+export PATH=/opt/gcc-14.1.0-1-aarch64/bin:$PATH
 ```
 in your `~/.bash_profile_common`.
 
@@ -89,7 +87,7 @@ See [here][ZSH] for helpful information on moving to `zsh`.
 
 ## Notes ##
 
-The software was built using the [building-gcc-macos-native][BUILDING] scripts at Github, tag `gcc-14.1.0-x86_64`.
+The software was built using the [building-gcc-macos-native][BUILDING] scripts at Github, tag `gcc-14.1.0-1-aarch64`.
 
 All compilations were done with `export MACOSX_DEPLOYMENT_TARGET=12` so that libraries and executables are compatible with macOS Monterey and later.
 
