@@ -19,7 +19,6 @@ $GCC_SRC/configure                                                       \
     --enable-languages=c,c++,ada                                         \
     --build=$BUILD                                                       \
     --with-build-sysroot=$SDKROOT                                        \
-    --with-sysroot=                                                      \
     --with-specs="%{!sysroot=*:--sysroot=%:if-exists-else($XCODE $CLT)}" \
     --with-bugurl=$BUGURL                                                \
     --$BOOTSTRAP-bootstrap

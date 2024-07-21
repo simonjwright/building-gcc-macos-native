@@ -49,14 +49,15 @@ SRC_PATH=$TOP/src
 # GCC source; there are lots of compiler options.
 
 # Building gcc-mirror
+# releases/gcc-14
 # GCC_SRC=$SRC_PATH/gcc
 
 # Building gcc-13 for aarch64; the actual tag in that clone is
 # gcc-13-3-darwin-r0 !!!
 # GCC_SRC=$SRC_PATH/gcc-13-branch
 
-# Building gcc-14 for aarch64; the actual tag in that clone is
-# gcc-14.1-darwin-r1.
+# Building gcc-14 for aarch64; the actual branch in that clone is
+# gcc-14-2-darwin-pre-0
 GCC_SRC=$SRC_PATH/gcc-14-branch
 
 # Building iains's WIP for aarch64
@@ -65,6 +66,9 @@ GCC_SRC=$SRC_PATH/gcc-14-branch
 # Building the latest FSF snapshot
 # SNAPSHOT=20240407
 # GCC_SRC=$SRC_PATH/gcc-14-$SNAPSHOT
+
+# Building FSF 14.1.0
+# GCC_SRC=$SRC_PATH/gcc-14.1.0
 
 # The default for an FSF releaase
 GCC_SRC=${GCC_SRC:-$SRC_PATH/gcc-$VERSION}

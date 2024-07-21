@@ -2,6 +2,8 @@ This is GCC 14.1.0 built on macOS Sonoma (14, Darwin 23) but able to run on Mont
 
 Compilers included: Ada, C, C++.
 
+Compiler sources are from https://github.com/iains/gcc-14-branch at tag `gcc-14.1-darwin-r1`.
+ 
 Tools included (all at version 24.0.0, and all with the  [Runtime Library Exception][RLE]):
 
 * AdaSAT from https://github.com/AdaCore/AdaSAT
@@ -22,30 +24,13 @@ Tools included (all at version 24.0.0, and all with the  [Runtime Library Except
 
 Configured with:
 ```
-Configured with:
-  --prefix=/Volumes/Miscellaneous3/x86_64/gcc-14.1.0-x86_64
-  --without-libiconv-prefix
-  --disable-libmudflap
-  --disable-libstdcxx-pch
-  --disable-libsanitizer
-  --disable-libcc1
-  --disable-libcilkrts
-  --disable-multilib
-  --disable-nls
-  --enable-languages=c,c++,ada
-  --host=x86_64-apple-darwin21
-  --target=x86_64-apple-darwin21
-  --build=x86_64-apple-darwin21
-  --without-isl
-  --with-build-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
-  --with-sysroot=
-  --with-specs='%{!sysroot=*:--sysroot=%:if-exists-else(/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)}'
-  --with-bugurl=https://github.com/simonjwright/building-gcc-macos-native
-  --enable-bootstrap
-  --enable-host-pie
-  CFLAGS=-Wno-deprecated-declarations
-  CXXFLAGS=-Wno-deprecated-declarations
+--prefix=/Volumes/Miscellaneous3/aarch64/gcc-14.1.0-1-aarch64
+--enable-languages=c,c++,ada
+--build=aarch64-apple-darwin21
+--with-build-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+--with-specs='%{!sysroot=*:--sysroot=%:if-exists-else(/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)}'
+--with-bugurl=https://github.com/simonjwright/building-gcc-macos-native
+--enable-bootstrap
 ```
 
 [RLE]: http://www.gnu.org/licenses/gcc-exception-faq.html
