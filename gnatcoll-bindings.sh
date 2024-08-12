@@ -3,6 +3,8 @@ script_loc=`cd $(dirname $0) && pwd -P`
 . $script_loc/common.sh
 
 PATH=$NEW_PATH
+export C_INCLUDE_PATH=$PREFIX/include
+export CPLUS_INCLUDE_PATH=$PREFIX/include
 
 cd $GNATCOLL_BINDINGS_SRC
 
