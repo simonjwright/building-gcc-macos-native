@@ -2,17 +2,18 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
-PATH=$NEW_PATH:$PATH
+PATH=$NEW_PATH
 
 cd $XMLADA_SRC
 
+make distclean || true
+
 ./configure                                     \
   --prefix=$PREFIX                              \
-  --host=$BUILD                                 \
   --target=$BUILD                               \
-  --build=$BUILD                                \
-  --enable-shared
+  --enable-shared                               \
+  PACKAGE_VERSION=v24.0.0
 
-make -w -j3 GPRBUILD_OPTIONS="--db $script_loc/config"
+make -w -j$CORES
 
-make install
+make -w install

@@ -1,23 +1,37 @@
+set -eu
+
 script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
-PATH=$NEW_PATH:$PATH
+PATH=$NEW_PATH
 
-python3 -m venv venv
+rm -rf venv
+$PYTHON -m venv venv
 
 source venv/bin/activate
 
 (
-    cd $SRC_PATH/langkit
+    cd $LANGKIT_SRC
 
-    pip install REQUIREMENTS.dev
+    rm -rf build
 
-    python manage.py \
-           make build-langkit-support \
-           --library-types=static,static-pic,relocatable
+    pip install -r requirements-github.txt
+    pip install -r requirements-pypi.txt
 
-    python $SRC_PATH/langkit/manage.py \
-           make install-langkit-support $PREFIX \
-           --library-types=static,static-pic,relocatable
+    pip install .
+
+    python manage.py                        \
+           build-langkit-support            \
+           --library-types=relocatable
+
+    # no --force in install-langkit-support
+    gprinstall --prefix=$PREFIX --uninstall langkit_support || true
+
+    python manage.py                        \
+           install-langkit-support          \
+           --library-types=relocatable      \
+           $PREFIX
 )
+
+deactivate

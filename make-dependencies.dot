@@ -1,0 +1,33 @@
+digraph {
+all [style=dotted]
+basic [style=dotted]
+
+all -> basic
+all -> libadalang_tools
+basic -> aunit
+basic -> gnatcoll_bindings
+basic -> gnatcoll_db
+adasat -> gprbuild
+aunit -> gprbuild
+gcc
+gmp -> gcc
+gnatcoll_bindings -> gmp
+gnatcoll_bindings -> gnatcoll_core
+gnatcoll_core -> gprbuild
+gnatcoll_db -> gnatcoll_core
+gpr2 -> langkit
+gprbuild -> gprconfig
+gprbuild -> xmlada
+gprconfig -> gcc
+langkit -> gprbuild
+libadalang -> adasat
+libadalang -> gnatcoll_bindings
+libadalang -> gpr2
+libadalang -> langkit
+libadalang_tools -> libadalang
+libadalang_tools -> templates_parser
+libadalang_tools -> vss
+templates_parser -> gprbuild
+vss -> gprbuild
+xmlada -> gprconfig
+}

@@ -2,14 +2,12 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
-PATH=$NEW_PATH:$PATH
+PATH=$NEW_PATH
 
-make -w -j3                                     \
+make -w -j$CORES                                \
      -C $AUNIT_SRC                              \
-     GPRBUILD_OPTIONS="--db $script_loc/config" \
-     all
+     clean all
 
-make -w -j3                                     \
+make -w                                         \
      -C $AUNIT_SRC                              \
-     GPRBUILD_OPTIONS="--db $script_loc/config" \
      install

@@ -1,4 +1,4 @@
-# Build using extant GCC.
+# Uses an existing compiler to build one for Alire.
 
 script_loc=`cd $(dirname $0) && pwd -P`
 
@@ -7,6 +7,7 @@ script_loc=`cd $(dirname $0) && pwd -P`
 XCODE=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
 CLT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 
+SDKROOT=$(xcrun --show-sdk-path)
 BUGURL=https://github.com/simonjwright/building-gcc-macos-native
 
 echo "BUILDING THE COMPILER IN $PREFIX"
@@ -16,19 +17,31 @@ rm -rf *
 
 $GCC_SRC/configure                                                       \
     --prefix=$PREFIX                                                     \
+    --without-libiconv-prefix                                            \
+    --disable-libmudflap                                                 \
+    --disable-libstdcxx-pch                                              \
+    --disable-libsanitizer                                               \
+    --disable-libcc1                                                     \
+    --disable-libcilkrts                                                 \
+    --disable-multilib                                                   \
+    --disable-nls                                                        \
     --enable-languages=c,c++,ada                                         \
+    --host=$BUILD                                                        \
+    --target=$BUILD                                                      \
     --build=$BUILD                                                       \
+    --without-isl                                                        \
     --with-build-sysroot=$SDKROOT                                        \
+    --with-sysroot=                                                      \
     --with-specs="%{!sysroot=*:--sysroot=%:if-exists-else($XCODE $CLT)}" \
     --with-bugurl=$BUGURL                                                \
-    --$BOOTSTRAP-bootstrap
+    --$BOOTSTRAP-bootstrap                                               \
+    --enable-host-pie                                                    \
+    CFLAGS=-Wno-deprecated-declarations                                  \
+    CXXFLAGS=-Wno-deprecated-declarations
 
 make -w -j$CORES
 
 make -w -j$CORES install
-
-echo ###### NOT INSTALLING THE SHIM ######
-exit
 
 # Install the shim for ld
 # Find the full path name for the C compiler's location
@@ -57,9 +70,6 @@ EOF
 
 # It needs to be executable!
 chmod +x $tool_path/ld
-
-echo ###### NOT FIXING UP RPATHS ######
-exit
 
 # Fix up rpaths.
 for exe in $PREFIX/bin/*; do
