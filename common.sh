@@ -4,7 +4,7 @@
 set -eu
 
 VERSION=${VERSION:=14.2.0}
-BUILD=$ARCH-apple-darwin21
+BUILD=$ARCH-apple-darwin23
 BOOTSTRAP=${BOOTSTRAP:=enable}   # or disable
 
 SDKROOT=${SDKROOT:-$(xcrun --show-sdk-path)}
@@ -12,7 +12,7 @@ PYTHON=python3.9
 CORES=$(sysctl -n hw.ncpu)
 
 # Exported so GCC sees it while compiling/linking: Monterey
-export MACOSX_DEPLOYMENT_TARGET=12
+export MACOSX_DEPLOYMENT_TARGET=14
 
 # Everything is under this directory (it's an external USB disk, named
 # Miscellaneous3). I do the builds on this disk, too, with the thought
@@ -57,7 +57,7 @@ SRC_PATH=$TOP/src
 # GCC_SRC=$SRC_PATH/gcc-13-branch
 
 # Building gcc-14 for aarch64; the actual branch in that clone is
-# gcc-14-2-darwin-r1
+# gcc-14-2-darwin-r2
 GCC_SRC=$SRC_PATH/gcc-14-branch
 
 # Building iains's WIP for aarch64
