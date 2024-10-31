@@ -1,8 +1,8 @@
-This is GCC 14.2.0 built on macOS Sonoma (14, Darwin 23) but able to run on Monterey, for Apple silicon, with Command Line Utilities 15.3.0 and Python 3.9.13.
+This is GCC 14.2.0 built on macOS Sonoma (14, Darwin 23) for Apple silicon, with Command Line Utilities 15.3.0 and Python 3.9.13.
 
 Compilers included: Ada, C, C++.
 
-Compiler sources are from https://github.com/iains/gcc-14-branch at tag `gcc-14.2-darwin-r1`.
+Compiler sources are from https://github.com/iains/gcc-14-branch at tag `gcc-14.2-darwin-r2`.
  
 Tools included (all at version 24.0.0, and all with the  [Runtime Library Exception][RLE]):
 
@@ -24,13 +24,17 @@ Tools included (all at version 24.0.0, and all with the  [Runtime Library Except
 
 Configured with:
 ```
---prefix=/Volumes/Miscellaneous3/aarch64/gcc-14.2.0-1-aarch64
+--prefix=/Volumes/Miscellaneous3/aarch64/gcc-14.2.0-2-aarch64
 --enable-languages=c,c++,ada
---build=aarch64-apple-darwin21
---with-build-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
---with-specs='%{!sysroot=*:--sysroot=%:if-exists-else(/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)}'
+--build=aarch64-apple-darwin23
+--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/../MacOSX14.sdk
+--with-specs='%{!-sysroot:--sysroot=%:if-exists-else(/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.sdk /Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk)}'
 --with-bugurl=https://github.com/simonjwright/building-gcc-macos-native
 --enable-bootstrap
+CC='/Volumes/Miscellaneous3/aarch64/gcc-14.2.0-clt15-aarch64/bin/gcc
+--sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk'
+CXX='/Volumes/Miscellaneous3/aarch64/gcc-14.2.0-clt15-aarch64/bin/g++
+--sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk'
 ```
 
 [RLE]: http://www.gnu.org/licenses/gcc-exception-faq.html
@@ -52,13 +56,13 @@ Download the binary `.pkg`. It's not signed, so **don't** double-click on it; in
 
 ### Setting PATH ###
 
-`PATH` needs to be set to include `/opt/gcc-14.2.0-1-aarch64/bin` at the front:
+`PATH` needs to be set to include `/opt/gcc-14.2.0-2-aarch64/bin` at the front:
 
 #### `bash` ####
 
 Insert
 ```
-export PATH=/opt/gcc-14.2.0-1-aarch64/bin:$PATH
+export PATH=/opt/gcc-14.2.0-2-aarch64/bin:$PATH
 ```
 in your `~/.bash_profile_common`.
 
@@ -72,9 +76,9 @@ See [here][ZSH] for helpful information on moving to `zsh`.
 
 ## Notes ##
 
-The software was built using the [building-gcc-macos-native][BUILDING] scripts at Github, tag `gcc-14.2.0-1-aarch64`.
+The software was built using the [building-gcc-macos-native][BUILDING] scripts at Github, tag `gcc-14.2.0-2-aarch64`.
 
-All compilations were done with `export MACOSX_DEPLOYMENT_TARGET=12` so that libraries and executables are compatible with macOS Monterey and later.
+All compilations were done with `export MACOSX_DEPLOYMENT_TARGET=14` so that libraries and executables are compatible with macOS Sonoma and later.
 
 [BUILDING]:https://github.com/simonjwright/building-gcc-macos-native
 
