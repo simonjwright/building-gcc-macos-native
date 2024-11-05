@@ -19,8 +19,12 @@ gpr2 -> langkit
 gprbuild -> gprconfig
 gprbuild -> xmlada
 gprconfig -> gcc
+prettier_ada -> gprbuild
+prettier_ada -> gnatcoll_core
+prettier_ada -> vss
 langkit -> gprbuild
-libadalang -> adasat
+langkit -> prettier_ada
+langkit -> adasat
 libadalang -> gnatcoll_bindings
 libadalang -> gpr2
 libadalang -> langkit

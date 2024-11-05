@@ -16,8 +16,6 @@ make -f $GPR2_SRC/Makefile                      \
      GPR2KBDIR=$GPRCONFIG_SRC/db                \
      setup
 
-make -w -j$CORES -f $GPR2_SRC/Makefile
-# Would have used target build-libs, but not available yet:
-# https://github.com/AdaCore/gpr/pull/10
+make -w -j$CORES -f $GPR2_SRC/Makefile build-libs
 
 make -w -f $GPR2_SRC/Makefile install-libs

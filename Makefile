@@ -140,9 +140,16 @@ adasat-stamp: gprbuild-stamp $(location)/common.sh $(location)/adasat.sh
 	-mkdir adasat
 	(cd adasat; $(location)/adasat.sh) && touch $@
 
+prettier-ada: prettier-ada-stamp
+.PHONY: prettier-ada
+prettier-ada-stamp:  gprbuild-stamp gnatcoll-core-stamp vss-stamp $(location)/common.sh $(location)/prettier-ada.sh
+	rm -f $@
+	-mkdir prettier-ada
+	(cd prettier-ada; $(location)/prettier-ada.sh) && touch $@
+
 langkit: langkit-stamp
 .PHONY: langkit
-langkit-stamp: gprbuild-stamp $(location)/common.sh $(location)/langkit.sh
+langkit-stamp: gprbuild-stamp adasat-stamp $(location)/common.sh $(location)/langkit.sh
 	rm -f $@
 	-mkdir langkit
 	(cd langkit; $(location)/langkit.sh) && touch $@

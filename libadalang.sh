@@ -6,9 +6,6 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 PATH=$NEW_PATH
 
-#  rm -rf venv
-#  $PYTHON -m venv venv
-
 source ../langkit/venv/bin/activate
 
 (
@@ -20,7 +17,13 @@ source ../langkit/venv/bin/activate
 
     pip install wheel
 
-    pip install -r REQUIREMENTS.dev
+    pip install -r requirements-pypi.txt
+
+    # For lib{lkt,python}lang.dylib
+    # We need lib and lib/gcc/*/adalib
+    libgcc=$(gcc -print-libgcc-file-name)
+    adalib=$(dirname $libgcc)/adalib
+    export DYLD_LIBRARY_PATH=$PREFIX/lib:$adalib
 
     python manage.py generate
 

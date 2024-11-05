@@ -4,17 +4,13 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 PATH=$NEW_PATH
 
-make -f $GNATCOLL_CORE_SRC/Makefile clean
+for prj in minimal core projects; do
+    $GNATCOLL_CORE_SRC/$prj/gnatcoll_$prj.gpr.py        \
+         build                                          \
+         --jobs 0                                       \
+         --prefix $PREFIX                               \
+         --enable-constant-updates                      \
+         --install
+done
 
-make -f $GNATCOLL_CORE_SRC/Makefile             \
-     prefix=$PREFIX                             \
-     ENABLE_SHARED=yes                          \
-     setup
-
-make -w                                         \
-     -j$CORES                                   \
-     -f $GNATCOLL_CORE_SRC/Makefile
-
-make -w                                         \
-     -f $GNATCOLL_CORE_SRC/Makefile             \
-     install
+cp $GNATCOLL_CORE_SRC/gnatcoll.gpr $PREFIX/share/gpr/
