@@ -6,7 +6,12 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 PATH=$NEW_PATH
 
-make -w -C $VSS_SRC                             \
-     VSS_LIBRARY_TYPE=relocatable               \
-     PREFIX=$PREFIX                             \
-     all install
+(
+    cd $VSS_SRC
+
+    make clean
+
+    make build-all-libs
+
+    make install-all-libs PREFIX=$PREFIX
+)

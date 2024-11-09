@@ -6,17 +6,18 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 PATH=$NEW_PATH
 
-gprclean -p -P $ADASAT_SRC/adasat.gpr           \
-         -XBUILD_MODE=prod                      \
-         -XADASAT_LIBRARY_TYPE=relocatable
+(
+    library_types="static static-pic relocatable"
+    
+    cd $ADASAT_SRC
 
-gprbuild -p -j$CORES -P $ADASAT_SRC/adasat.gpr  \
-         -XBUILD_MODE=prod                      \
-         -XADASAT_LIBRARY_TYPE=relocatable
+    for type in $library_types; do
+        make clean LIBRARY_TYPE=$type BUILD_MODE=prod
+    done
 
-gprinstall -f                                   \
-           -p                                   \
-           -P $ADASAT_SRC/adasat.gpr            \
-           -XBUILD_MODE=prod                    \
-           -XADASAT_LIBRARY_TYPE=relocatable    \
-           --prefix=$PREFIX
+    make all-libs BUILD_MODE=prod
+
+    for type in $library_types; do
+        make install INSTALL_DIR=$PREFIX LIBRARY_TYPE=$type BUILD_MODE=prod
+    done
+)

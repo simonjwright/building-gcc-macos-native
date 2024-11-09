@@ -25,10 +25,8 @@ source ../langkit/venv/bin/activate
     adalib=$(dirname $libgcc)/adalib
     export DYLD_LIBRARY_PATH=$PREFIX/lib:$adalib
 
-    python manage.py generate
-
     python manage.py                            \
-           build                                \
+           make                                 \
            --build-mode=prod                    \
            --library-types=relocatable          \
            --disable-java
