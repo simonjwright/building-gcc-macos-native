@@ -60,7 +60,7 @@ This library (release 6.2.1) is installed with the compiler.
 
 ### Other sources ###
 
-The necessary patches to the v25.0.0 tools are included in the release in the file `patches.zip`.
+The necessary patches to the v25.0.0 tools are included in the release in the file `gcc-14.2.0-3-patches.zip`.
 
 ### Include, library paths ###
 

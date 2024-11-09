@@ -36,13 +36,13 @@ arch -x86_64 /bin/bash
 ### Making ###
 
 Some variables can be overridden during the `make` invocation:
-* `VERSION`, e.g. `13.2.1` - the default is `13.2.0`. This controls where the built components are installed.
+* `VERSION`, e.g. `14.2.0-3` - the default is `14.2.0`. This controls where the built components are installed.
 * `BOOTSTRAP`, e.g. `disable` - the default is `enable`; this controls the GCC build via the `configure` option `--$BOOTSTRAP-bootstrap`.
 
 Assuming you've got this directory in `~/building-gcc-macos-native`, all your source code in <tt>~/gcc-src/<i>package-src</i></tt>, `common.sh` is set up,and you're going to build just `gprbuild` under `~/tmp/arch64`, you would say in `~/tmp/aarch64`
 ```
  make -f ~/building-gcc-macos-native/Makefile gprbuild \
-     VERSION=13.2.1 BOOTSTRAP=disable
+     VERSION=14.2.0-3 BOOTSTRAP=disable
 ```
 The individual components will appear in `gcc/`, `gprconfig/`, `xmlada/` and `gprbuild/`.
 
@@ -52,7 +52,7 @@ The individual components will appear in `gcc/`, `gprconfig/`, `xmlada/` and `gp
 ```
 contrib/download_prerequisites
 ```
-* *XML/Ada* requires *gprbuild*. In order to have built GCC, you must have had a compatible GNAT on your `PATH` already. Assuming that that GNAT contains a *gprbuild*, that should do (for example, the GCC 8.1.0 *XML/Ada* built OK with the GCC 7.1.0 *gprbuild*). If not, check out `bootstrap.sh` in the *gprbuild* sources.
+* *XML/Ada* requires *gprbuild*. In order to have built GCC, you must have had a compatible GNAT on your `PATH` already. Assuming that that GNAT contains a *gprbuild*, that should do (for example, the GCC 14.1.0 *XML/Ada* built OK with the GCC 13.1.0 *gprbuild*). If not, check out `bootstrap.sh` in the *gprbuild* sources.
 * `gprbuild`: update `{gprbuild}/gpr/src/gpr-version.ads` to match the current release state.
 * `gnatmetric`, `gnatpp`, `gnatstub`, `gnattest`: update `{libadalang-tools}/src/utils-versions.ads` likewise.
 * `libadalang` and `langkit` sources need to be kept synchronised.
