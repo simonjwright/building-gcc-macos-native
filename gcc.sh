@@ -14,6 +14,9 @@ echo "BUILDING THE COMPILER IN $PREFIX"
 set -eu
 rm -rf *
 
+BASE_COMPILER=/Volumes/Miscellaneous3/x86_64/gcc-14.2.0-clt-x86_64
+BASE_SYSROOT=/Library/Developer/CommandLineTools-14.3/SDKs/MacOSX13.sdk
+
 $GCC_SRC/configure                                                      \
     --prefix=$PREFIX                                                    \
     --enable-languages=c,c++,ada                                        \
@@ -22,8 +25,8 @@ $GCC_SRC/configure                                                      \
     --with-specs="%{!-sysroot:--sysroot=%:if-exists-else($XCODE $CLT)}" \
     --with-bugurl=$BUGURL                                               \
     --$BOOTSTRAP-bootstrap                                              \
-    CC="/Volumes/Miscellaneous3/aarch64/gcc-14.2.0-clt15-aarch64/bin/gcc --sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk" \
-    CXX="/Volumes/Miscellaneous3/aarch64/gcc-14.2.0-clt15-aarch64/bin/g++ --sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk"
+    CC="$BASE_COMPILER/bin/gcc --sysroot=$BASE_SYSROOT"                 \
+    CXX="$BASE_COMPILER/bin/g++ --sysroot=$BASE_SYSROOT"
 
 make -w -j$CORES
 
