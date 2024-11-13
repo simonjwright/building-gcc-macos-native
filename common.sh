@@ -58,7 +58,7 @@ SRC_PATH=$TOP/src
 
 # Building gcc-14 for aarch64; the actual branch in that clone is
 # gcc-14-2-darwin-r2
-GCC_SRC=$SRC_PATH/gcc-14-branch
+# GCC_SRC=$SRC_PATH/gcc-14-branch
 
 # Building iains's WIP for aarch64
 # This is 15.0.0.
@@ -69,7 +69,7 @@ GCC_SRC=$SRC_PATH/gcc-14-branch
 # GCC_SRC=$SRC_PATH/gcc-14-$SNAPSHOT
 
 # Building FSF 14.2.0
-# GCC_SRC=$SRC_PATH/gcc-14.2.0
+GCC_SRC=$SRC_PATH/gcc-14.2.0
 
 # The default for an FSF releaase
 GCC_SRC=${GCC_SRC:-$SRC_PATH/gcc-$VERSION}
