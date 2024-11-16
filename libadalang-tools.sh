@@ -9,27 +9,22 @@ PATH=$NEW_PATH
 # Have to use BUILD_MODE=prod to avoid a warning-treated-as-error
 
 make -w -C $LIBADALANG_TOOLS_SRC                \
-     ALL_LIBRARY_TYPES=relocatable              \
-     LIBRARY_TYPE=relocatable                   \
      BUILD_MODE=prod                            \
      clean
 
 gprinstall --prefix=$PREFIX --uninstall lal_tools || true
 
 make -w -j$CORES -C $LIBADALANG_TOOLS_SRC       \
-     ALL_LIBRARY_TYPES=relocatable              \
      BUILD_MODE=prod                            \
      lib
 
 make -w -C $LIBADALANG_TOOLS_SRC                \
-     ALL_LIBRARY_TYPES=relocatable              \
      BUILD_MODE=prod                            \
      DESTDIR=$PREFIX                            \
      install-lib
 
 make -w -j$CORES -C $LIBADALANG_TOOLS_SRC       \
-     ALL_LIBRARY_TYPES=relocatable              \
-     LIBRARY_TYPE=relocatable                   \
+     LIBRARY_TYPE=static                        \
      BUILD_MODE=prod                            \
      bin
 

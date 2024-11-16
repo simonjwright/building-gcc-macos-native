@@ -8,7 +8,7 @@ BUILD=$ARCH-apple-darwin23
 BOOTSTRAP=${BOOTSTRAP:=enable}   # or disable
 
 SDKROOT=${SDKROOT:-$(xcrun --show-sdk-path)}
-PYTHON=python3.9
+PYTHON=/Library/Frameworks/Python.framework/Versions/3.9/bin/python3
 CORES=$(sysctl -n hw.ncpu)
 
 # Exported so GCC sees it while compiling/linking: Monterey

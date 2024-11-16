@@ -25,33 +25,37 @@ pip install --upgrade pip
 
     pip install .
 
-    python                                      \
-        manage.py                               \
-        make                                    \
-        --no-mypy                               \
-        --generate-auto-dll-dirs                \
-        --build-mode=prod                       \
-        --library-types relocatable             \
+    python                                              \
+        manage.py                                       \
+        make                                            \
+        --no-mypy                                       \
+        --generate-auto-dll-dirs                        \
+        --build-mode=prod                               \
+        --library-types relocatable,static-pic,static   \
         --gargs '-cargs -fPIC'
     
     # no --force in install-langkit-support
     gprinstall --prefix=$PREFIX --uninstall langkit_support || true
 
-    python manage.py                            \
-           install-langkit-support              \
-           --build-mode=prod                    \
-           --library-types relocatable          \
+    python manage.py                                            \
+           install-langkit-support                              \
+           --build-mode=prod                                    \
+           --library-types relocatable,static-pic,static        \
            $PREFIX
 
     (
         cd contrib/python                                       \
-        python                                  \
-            ./manage.py                         \
-            install                             \
-            --force                             \
-            $PREFIX                             \
-            --library-types=relocatable         \
-            --build-mode=prod                   \
+
+        # manage.py install --force doesn't work
+        gprinstall --prefix=$PREFIX --uninstall libpythonlang || true
+
+        python                                                  \
+            ./manage.py                                         \
+            install                                             \
+            --force                                             \
+            $PREFIX                                             \
+            --library-types=relocatable,static-pic,static       \
+            --build-mode=prod                                   \
             --disable-all-mains
     )
 
@@ -59,13 +63,17 @@ pip install --upgrade pip
 
     (
         cd contrib/lkt
-        python                                  \
-            ./manage.py                         \
-            install                             \
-            --force                             \
-            $PREFIX                             \
-            --library-types=relocatable         \
-            --build-mode=prod                   \
+
+        # manage.py install --force doesn't work
+        gprinstall --prefix=$PREFIX --uninstall liblktlang || true
+
+        python                                                  \
+            ./manage.py                                         \
+            install                                             \
+            --force                                             \
+            $PREFIX                                             \
+            --library-types=relocatable,static-pic,static       \
+            --build-mode=prod                                   \
             --disable-all-mains
     )
 

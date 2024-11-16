@@ -25,10 +25,10 @@ source ../langkit/venv/bin/activate
     adalib=$(dirname $libgcc)/adalib
     export DYLD_LIBRARY_PATH=$PREFIX/lib:$adalib
 
-    python manage.py                            \
-           make                                 \
-           --build-mode=prod                    \
-           --library-types=relocatable          \
+    python manage.py                                            \
+           make                                                 \
+           --build-mode=prod                                    \
+           --library-types=relocatable,static-pic,static        \
            --disable-java
 
     # The runpaths in executables are unhelpful if $PREFIX isn't a
@@ -39,11 +39,14 @@ source ../langkit/venv/bin/activate
         fi
     done
     
-    python manage.py                            \
-           install                              \
-           --build-mode=prod                    \
-           --force                              \
-           --library-types=relocatable          \
+    # manage.py install --force didn't work (but saw -f ??)
+    gprinstall --prefix=$PREFIX --uninstall libadalang || true
+
+    python manage.py                                            \
+           install                                              \
+           --build-mode=prod                                    \
+           --force                                              \
+           --library-types=relocatable,static-pic,static        \
            $PREFIX
 )
 
