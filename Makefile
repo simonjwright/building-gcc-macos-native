@@ -97,7 +97,6 @@ gprbuild-stamp: xmlada-stamp gprconfig-stamp $(location)/common.sh $(location)/g
 gprbuild-for-alire: gprbuild-for-alire-stamp
 .PHONY: gprbuild-for-alire
 # The script installs gprconfig itself.
-# The script uses xmlada.gpr to
 gprbuild-for-alire-stamp: gcc-for-alire-stamp \
     $(location)/common.sh $(location)/gprbuild-for-alire.sh \
     $(location)/xmlada.gpr
