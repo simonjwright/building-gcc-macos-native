@@ -5,7 +5,8 @@ script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
-# build next to gcc
+# Build next to gcc.
+# The Alire-downloadable archive needs to have gprbuild/ as its top level.
 GPRBUILD_PREFIX=$PREFIX/../gprbuild
 
 # Install gprconfig first.
@@ -18,37 +19,29 @@ cp -p $GPRCONFIG_SRC/db/* $gprconfig_install_loc/
 
 rm -rf *
 
-# We're going to use our own xmlada.gpr (we can't use the one that
-# xmlada would install with the compiler, because it's an aggregate;
-# we only want a static build anyway).
-GPR_PROJECT_PATH=$script_loc
-# That xmlada.gpr needs $XMLADA_SRC, but it's only a local variable so
-# far because common.sh is sourced.
-export XMLADA_SRC
+# Use the compiler we've already built.
+PATH=$NEW_PATH
 
 echo "*** cleaning ***"
 make -w -f $GPRBUILD_SRC/Makefile               \
      TARGET=$BUILD                              \
-     ENABLE_SHARED=yes                          \
+     ENABLE_SHARED=no                           \
      clean || true  # otherwise, fail because there's no Fortran
 
 echo "*** setting up ***"
 make -w -f $GPRBUILD_SRC/Makefile               \
-     GPR_PROJECT_PATH=$GPR_PROJECT_PATH         \
      TARGET=$BUILD                              \
-     ENABLE_SHARED=yes                          \
+     ENABLE_SHARED=no                           \
      setup
 
 echo "*** building ***"
 make -w -j$CORES                                \
      -f $GPRBUILD_SRC/Makefile                  \
-     GPR_PROJECT_PATH=$GPR_PROJECT_PATH         \
      all
 
 echo "*** installing ***"
 make -w                                         \
      -f $GPRBUILD_SRC/Makefile                  \
-     GPR_PROJECT_PATH=$GPR_PROJECT_PATH         \
      prefix=$GPRBUILD_PREFIX                    \
      install
 
