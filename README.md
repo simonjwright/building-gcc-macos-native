@@ -4,6 +4,9 @@ This set of scripts supports building GCC Ada, or GNAT, on macOS as a native com
 
 `python3` is required. If not installed, you can download a binary from [python.org](https://www.python.org).
 
+## Ready-built binaries
+If you are simply interested in the resulting builds you can check out the releases of [simonjwright/distributing-gcc](https://github.com/simonjwright/distributing-gcc/releases).
+
 ## Building ##
 
 Building is done in a set of shell scripts. The scripts are to some extent order-dependent, and this is catered for here by a Makefile.
