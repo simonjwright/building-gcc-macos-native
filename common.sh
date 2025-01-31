@@ -61,12 +61,12 @@ SRC_PATH=$TOP/src
 # GCC_SRC=$SRC_PATH/gcc-14-branch
 
 # Building iains's WIP for aarch64
-# This is 15.0.0.
-# GCC_SRC=$SRC_PATH/gcc-darwin-arm64
+# This is 15.0.1.
+GCC_SRC=$SRC_PATH/gcc-darwin-arm64
 
 # Building the latest FSF snapshot
-SNAPSHOT=gcc-15-20241110
-GCC_SRC=$SRC_PATH/$SNAPSHOT
+# SNAPSHOT=gcc-15-20241110
+# GCC_SRC=$SRC_PATH/$SNAPSHOT
 
 # Building FSF 14.2.0
 # GCC_SRC=$SRC_PATH/gcc-14.2.0
